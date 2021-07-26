@@ -8,6 +8,7 @@ import Switch from "@material-ui/core/Switch";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
+import UserSelectionMenu from "./UserSelectionMenu/UserSelectionMenu";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,9 +42,10 @@ function Header(props) {
                         WorkBoards
                     </Typography>
                     <Box>
-                        <Typography variant="h8">admin</Typography>
+                        <UserSelectionMenu/>
+                        {/*<Typography variant="h8">admin</Typography>
                         <Switch onChange={() => props.setIsAdmin(!props.isAdmin)}/>
-                        <Typography variant="h8">user</Typography>
+                        <Typography variant="h8">user</Typography>*/}
                     </Box>
                 </Toolbar>
             </AppBar>
