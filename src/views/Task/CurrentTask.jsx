@@ -9,12 +9,13 @@ function CurrentTask(props) {
 
     return (
         <Card>
-            <TaskContent title={'Make something'} priority={6}
-                         description={'There is no consensus on the right way to organize a React application. ' +
-                         'React gives you a lot of freedom, but with that freedom comes the responsibility of deciding on your own architecture.'}
+            <TaskContent title={props.title}
+                         priority={props.priority}
+                         description={props.description}
             />
             <Box display={'flex'} justifyContent="flex-end" m={1}>
-                <Button color={'primary'} endIcon={<LibraryAddOutlinedIcon/>}
+                <Button color={'primary'} onClick={props.takeTask}
+                        endIcon={<LibraryAddOutlinedIcon/>}
                         size="midle">take a task</Button>
             </Box>
         </Card>

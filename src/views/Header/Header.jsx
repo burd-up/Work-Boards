@@ -4,16 +4,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from '@material-ui/icons/Menu';
-import Switch from "@material-ui/core/Switch";
 import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
 import UserSelectionMenu from "./UserSelectionMenu/UserSelectionMenu";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
     menuButton: {
         marginRight: theme.spacing(1),
     },
@@ -42,10 +38,8 @@ function Header(props) {
                         WorkBoards
                     </Typography>
                     <Box>
-                        <UserSelectionMenu/>
-                        {/*<Typography variant="h8">admin</Typography>
-                        <Switch onChange={() => props.setIsAdmin(!props.isAdmin)}/>
-                        <Typography variant="h8">user</Typography>*/}
+                        <UserSelectionMenu users={props.users} setCurrentUser={props.setCurrentUser}
+                                           currentUser={props.currentUser}/>
                     </Box>
                 </Toolbar>
             </AppBar>

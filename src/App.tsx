@@ -1,12 +1,9 @@
 import React, {useState} from "react";
 import './App.css';
-import Header from "./views/Header/Header";
+import Header from "./views/Header/HeaderContainer";
 import {Switch, Route} from 'react-router-dom'
 import Form from "./views/Form/Form";
-import ControlPanel from "./views/ControlPanel/ControlPanel";
-import WorkBoard from "./views/WorkBoard/WorkBoard";
-import Box from "@material-ui/core/Box";
-import indigo from "@material-ui/core/colors/indigo";
+import WorkBoard from "./views/WorkBoard/WorkBoardContainer";
 import Container from "@material-ui/core/Container";
 
 function App() {
