@@ -1,25 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {projectType, userType} from '../types/types';
 
-type taskType = {
-    id: number
-    name: string
-    description: string
-    priority: number
-    status: 'newTask' | 'development' | 'testing' | 'ready'
-    communication: Array<string>
-    developer: Object | null
-    tester: Object | null
-    creator: Object | null
-}
-
-type projectType = {
-    id: number
-    name: string
-    developersId: Array<number>
-    tasks: Array<taskType>
-}
-
-type initialStateType = {
+export type initialStateType = {
     currentProjectId: number
     projects: Array<projectType>
 }
@@ -38,9 +20,9 @@ const initialState: initialStateType = {
             status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
             communication: [],
             developer: null,
+            forReview: null,
             tester: null,
             creator: null,
-
         }, {
             id: 1,
             name: 'Create React app',
@@ -52,6 +34,7 @@ const initialState: initialStateType = {
             status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
             communication: [],
             developer: null,
+            forReview: null,
             tester: null,
             creator: null,
         },
@@ -64,6 +47,7 @@ const initialState: initialStateType = {
                 status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
                 communication: [],
                 developer: null,
+                forReview: null,
                 tester: null,
                 creator: null,
             }]
@@ -79,6 +63,7 @@ const initialState: initialStateType = {
             status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
             communication: [],
             developer: null,
+            forReview: null,
             tester: null,
             creator: null,
         }, {
@@ -92,6 +77,7 @@ const initialState: initialStateType = {
             status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
             communication: [],
             developer: null,
+            forReview: null,
             tester: null,
             creator: null,
         },
@@ -103,14 +89,31 @@ export const projectSlice = createSlice({
     name: 'projects',
     initialState,
     reducers: {
-        takeTaskForDevelopment: (state, action) => {
+        takeTaskForDevelopment: (state:initialStateType, action:{payload: {developer: userType, taskId: number}}) => {
             let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
             let indexTask = state.projects[indexProject].tasks.findIndex(el => el.id === action.payload.taskId);
             state.projects[indexProject].tasks[indexTask].status = 'development';
+            state.projects[indexProject].tasks[indexTask].developer = action.payload.developer;
+        },
+        takeTaskForReview: (state:initialStateType, action:{payload: {tester: userType, taskId: number}}) => {
+            let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
+            let indexTask = state.projects[indexProject].tasks.findIndex(el => el.id === action.payload.taskId);
+            state.projects[indexProject].tasks[indexTask].status = 'testing';
+            state.projects[indexProject].tasks[indexTask].tester = action.payload.tester;
+        },
+        giveTaskForReview: (state:initialStateType, action:{payload: {taskId: number}}) => {
+            let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
+            let indexTask = state.projects[indexProject].tasks.findIndex(el => el.id === action.payload.taskId);
+            state.projects[indexProject].tasks[indexTask].forReview = true;
+        },
+        approveTask: (state:initialStateType, action:{payload: {taskId: number}}) => {
+            let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
+            let indexTask = state.projects[indexProject].tasks.findIndex(el => el.id === action.payload.taskId);
+            state.projects[indexProject].tasks[indexTask].status = 'ready';
         },
     },
 })
 
-export const {takeTaskForDevelopment,} = projectSlice.actions
+export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask} = projectSlice.actions
 
 export default projectSlice.reducer

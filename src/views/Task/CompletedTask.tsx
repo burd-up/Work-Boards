@@ -5,6 +5,7 @@ import TaskContent from "./AuxiliaryComponents/TaskContent";
 import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlineOutlined';
 import green from "@material-ui/core/colors/green";
 import {makeStyles} from "@material-ui/styles";
+import {taskType, userType} from "../../types/types";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -12,14 +13,17 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function CompletedTask(props) {
+type PropsType = taskType & {
+    currentUser: userType
+}
+
+const CompletedTask: React.FC<PropsType> = function (props:PropsType) {
     const classes = useStyles();
 
     return (
         <Card>
-            <TaskContent title={'Make something'} priority={6}
-                         description={'There is no consensus on the right way to organize a React application. ' +
-                         'React gives you a lot of freedom, but with that freedom comes the responsibility of deciding on your own architecture.'}
+            <TaskContent title={props.name} priority={props.priority}
+                         description={props.description}
             />
             <Box display={'flex'} justifyContent="flex-end" m={1}>
                 <CheckCircleOutlineOutlinedIcon fontSize={'large'} className={classes.icon} />

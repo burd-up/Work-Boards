@@ -7,6 +7,7 @@ import RunningTask from "../Task/RunningTask";
 import ReviewTask from "../Task/ReviewTask";
 import CompletedTask from "../Task/CompletedTask";
 import Typography from "@material-ui/core/Typography";
+import {PropsWorkBoardType} from "./WorkBoardContainer";
 
 const useStyles = makeStyles((theme) => ({
     workBoard: {
@@ -14,24 +15,33 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-function WorkBoard(props) {
+const WorkBoard: React.FC<PropsWorkBoardType> = function(props: PropsWorkBoardType) {
 
     const classes = useStyles();
 
     const currentTasks = props.currentTasks.map(el => <CurrentTask
-        key={el.id}
-        takeTask={() => props.takeTaskForDevelopment({development: props.currentUser, taskId: el.id})}
-        title={el.name}
-        priority={el.priority}
-        description={el.description}/>)
+        {...el}
+        currentUser={props.currentUser}
+        takeTaskForDevelopment={props.takeTaskForDevelopment}
+    />)
 
     const runningTasks = props.runningTasks.map(el => <RunningTask
-        key={el.id}
-        title={el.name}
-        priority={el.priority}
-        description={el.description}/>)
+        {...el}
+        currentUser={props.currentUser}
+        takeTaskForReview={props.takeTaskForReview}
+        giveTaskForReview={props.giveTaskForReview}
+    />)
 
+    const reviewTasks = props.reviewTasks.map(el => <ReviewTask
+        {...el}
+        currentUser={props.currentUser}
+        approveTask={props.approveTask}
+    />)
+
+    const completedTasks = props.completedTasks.map(el => <CompletedTask
+        {...el}
+        currentUser={props.currentUser}
+    />)
 
     return (
         <div>
@@ -44,10 +54,10 @@ function WorkBoard(props) {
                 <Board title={'Running tasks'} tasks={runningTasks}/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <Board title={'Tasks under review'} tasks={[<ReviewTask/>, <ReviewTask/>]}/>
+                <Board title={'Tasks under review'} tasks={reviewTasks}/>
             </Grid>
             <Grid item xs={12} md={6}>
-                <Board title={'Completed tasks'} tasks={[<CompletedTask/>, <CompletedTask/>]}/>
+                <Board title={'Completed tasks'} tasks={completedTasks}/>
             </Grid>
         </Grid>
         </div>

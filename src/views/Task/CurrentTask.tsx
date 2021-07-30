@@ -4,19 +4,29 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import LibraryAddOutlinedIcon from '@material-ui/icons/LibraryAddOutlined';
 import TaskContent from "./AuxiliaryComponents/TaskContent";
+import {taskType, userType} from "../../types/types";
 
-function CurrentTask(props) {
+type PropsType = taskType & {
+    currentUser: userType
+    takeTaskForDevelopment: (payload: {developer: userType, taskId: number}) => void
+}
+
+
+const CurrentTask: React.FC<PropsType> = function (props:PropsType ) {
 
     return (
         <Card>
-            <TaskContent title={props.title}
+            <TaskContent title={props.name}
                          priority={props.priority}
                          description={props.description}
             />
             <Box display={'flex'} justifyContent="flex-end" m={1}>
-                <Button color={'primary'} onClick={props.takeTask}
+                {props.currentUser.accessLevel !== 2 &&
+                <Button color='primary'
+                        onClick={() => props.takeTaskForDevelopment({developer: props.currentUser, taskId: props.id})}
                         endIcon={<LibraryAddOutlinedIcon/>}
-                        size="midle">take a task</Button>
+                        size="medium">take a task</Button>
+                }
             </Box>
         </Card>
     );
