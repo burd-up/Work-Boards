@@ -8,6 +8,7 @@ import ReviewTask from "../Task/ReviewTask";
 import CompletedTask from "../Task/CompletedTask";
 import Typography from "@material-ui/core/Typography";
 import {PropsWorkBoardType} from "./WorkBoardContainer";
+import {takeTaskForRevision} from "../../store/projects-reducer";
 
 const useStyles = makeStyles((theme) => ({
     workBoard: {
@@ -20,27 +21,31 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function(props: PropsWorkBoardTy
     const classes = useStyles();
 
     const currentTasks = props.currentTasks.map(el => <CurrentTask
-        {...el}
+        task={el}
         currentUser={props.currentUser}
         takeTaskForDevelopment={props.takeTaskForDevelopment}
     />)
 
     const runningTasks = props.runningTasks.map(el => <RunningTask
-        {...el}
+        task={el}
         currentUser={props.currentUser}
         takeTaskForReview={props.takeTaskForReview}
         giveTaskForReview={props.giveTaskForReview}
+        sendMessage={props.sendMessage}
     />)
 
     const reviewTasks = props.reviewTasks.map(el => <ReviewTask
-        {...el}
+        task={el}
         currentUser={props.currentUser}
         approveTask={props.approveTask}
+        sendMessage={props.sendMessage}
+        takeTaskForRevision={props.takeTaskForRevision}
     />)
 
     const completedTasks = props.completedTasks.map(el => <CompletedTask
-        {...el}
+        task={el}
         currentUser={props.currentUser}
+        sendMessage={props.sendMessage}
     />)
 
     return (

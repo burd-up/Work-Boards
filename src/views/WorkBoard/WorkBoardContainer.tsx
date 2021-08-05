@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import WorkBoard from "./WorkBoard";
 import {currentProjectSelector} from "../../utils/selectors/currentProject-selector";
-import {giveTaskForReview, takeTaskForDevelopment, takeTaskForReview, approveTask} from "../../store/projects-reducer";
+import {giveTaskForReview, takeTaskForDevelopment, takeTaskForReview, approveTask, sendMessage, takeTaskForRevision} from "../../store/projects-reducer";
 import {selectTasksByStatus} from "../../utils/selectors/task-selectors";
 import {RootState} from "../../store/store";
 import {projectType, taskType, userType} from "../../types/types";
@@ -13,6 +13,8 @@ type MapDispatchPropsType = {
     takeTaskForReview: (payload: { tester: userType, taskId: number }) => void
     giveTaskForReview: (payload: {taskId: number}) => void
     approveTask: (payload: {taskId: number}) => void
+    sendMessage: (payload: {taskId: number, author: userType, message: string}) => void
+    takeTaskForRevision: (payload: {taskId: number }) => void
 }
 type MapStatePropsType = {
     currentUser: userType
@@ -36,4 +38,4 @@ let mapStateToProps = (state:RootState): MapStatePropsType => {
 }
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState>
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, RootState> (mapStateToProps,
-    {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask})(WorkBoard)
+    {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage, takeTaskForRevision})(WorkBoard)

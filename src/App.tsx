@@ -7,11 +7,10 @@ import WorkBoard from "./views/WorkBoard/WorkBoardContainer";
 import Container from "@material-ui/core/Container";
 
 function App() {
-    const [isAdmin, setIsAdmin] = useState(true);
 
     return (
         <div className='App'>
-            <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
+            <Header/>
             <Switch>
                 <Container>
                     <Route path='/form' render={() => <Form/>}/>

@@ -4,7 +4,7 @@ export type taskType = {
     description: string
     priority: number
     status: 'newTask' | 'development' | 'testing' | 'ready'
-    communication: Array<string>
+    communication: Array<messageType>
     forReview: boolean | null
     developer: userType | null
     tester: userType | null
@@ -23,4 +23,10 @@ export type userType = {
     position: string
     accessLevel: number
     projects: Array<number>
+}
+export type messageType = {
+    id: number
+    message: string
+    author: userType
+    whoRead: Array<number>
 }

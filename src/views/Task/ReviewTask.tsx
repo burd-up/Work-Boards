@@ -7,31 +7,49 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import {taskType, userType} from "../../types/types";
+import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
+import CommunicationWindow from "./AuxiliaryComponents/CommunicationWindow";
 
-type PropsType = taskType & {
+type PropsType = {
+    task: taskType
     currentUser: userType
     approveTask: (payload: {taskId: number}) => void
+    sendMessage: (payload: { taskId: number, message: string, author: userType }) => void
+    takeTaskForRevision: (payload: {taskId: number }) => void
 }
 
 const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
 
+    const [isOpenMessages, setIsOpenMessages] = React.useState(false);
+
     return (
         <Card>
-            <TaskContent title={props.name} priority={props.priority}
-                         description={props.description}
+            <TaskContent {...props.task}
             />
-            <Box display={'flex'} justifyContent="flex-end" m={1}>
+            <Box display={'flex'} justifyContent="space-between" m={1}>
                 <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
-                    {props.tester?.id === props.currentUser.id
-                    && <Button color={'secondary'} endIcon={<RateReviewOutlinedIcon/>}
-                               size="medium">for revision</Button>
+                    {(props.currentUser.id === props.task.developer?.id ||
+                        props.currentUser.id === props.task.tester?.id ||
+                        props.currentUser.id === props.task.creator?.id)
+                    &&
+                    <Button onClick={() => setIsOpenMessages(true)}>
+                        {<MessageOutlinedIcon color={'primary'}/>}
+                    </Button>
                     }
-                    {props.tester?.id === props.currentUser.id
+                    {props.task.tester?.id === props.currentUser.id
+                    && <Button color={'secondary'} onClick={() => props.takeTaskForRevision({taskId: props.task.id})}
+                               endIcon={<RateReviewOutlinedIcon/>}
+                               size="medium">revision</Button>
+                    }
+                    {props.task.tester?.id === props.currentUser.id
                     && <Button color={'primary'}
-                               onClick={() => props.approveTask({taskId: props.id})}
+                               onClick={() => props.approveTask({taskId: props.task.id})}
                                endIcon={<ThumbUpAltOutlinedIcon/>}
                             size="medium">approve</Button>
                     }
+                    <CommunicationWindow sendMessage={props.sendMessage} currentUser={props.currentUser} isOpenMessages={isOpenMessages}
+                                         setIsOpenMessages={setIsOpenMessages}
+                                         {...props.task}/>
                 </ButtonGroup>
             </Box>
         </Card>

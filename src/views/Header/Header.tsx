@@ -8,6 +8,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
 import UserSelectionMenu from "./UserSelectionMenu/UserSelectionMenu";
+import {HeaderPropsType} from "./HeaderContainer";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Header(props) {
+const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
 
     const [isOpenLeftMenu, setIsOpenLeftMenu] = useState(false);
 
@@ -26,7 +27,7 @@ function Header(props) {
 
     return (
         <Box width={'100%'}>
-            <DrawerMenu isAdmin={props.isAdmin} isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu}/>
+            <DrawerMenu accessLevel={props.currentUser.accessLevel} isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu}/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton}
