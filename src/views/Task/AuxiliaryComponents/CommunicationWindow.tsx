@@ -70,6 +70,7 @@ const CommunicationWindow: React.FC<AllInformationTaskPropsType> = function (pro
                     <AllMessage messages={props.communication} currentUserId={props.currentUser.id}/>
                 </Paper>
                     <OutlinedInput
+                        /*onKeyDown={event => event.keyCode === 13 && send()}*/
                         multiline={true}
                         maxRows={5}
                         placeholder={'enter message...'}

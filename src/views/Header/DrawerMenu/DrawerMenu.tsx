@@ -13,6 +13,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import {NavLink} from "react-router-dom";
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 
 type DrawerMenuPropsType = {
     accessLevel: number
@@ -70,7 +71,8 @@ function DrawerMenu(props:DrawerMenuPropsType) {
                     </IconButton>
                 </Box>
             </Box>
-            <List url={'/boards'} icon={<DashboardIcon/>} text={"Boards"}/>
+            <List url={'/projects'} icon={<AccountTreeIcon/>} text={"Projects"}/>
+            <List url={'/boards'} icon={<DashboardIcon/>} text={"Current project"}/>
             <List url={'/boards'} icon={<ListAltIcon/>} text={"My tasks"}/>
             {props.accessLevel === 3 && <List url={'/form'} icon={<PlaylistAddIcon/>} text={"Add tasks"}/>}
             {props.accessLevel === 3 && <List url={'/form'} icon={<NoteAddIcon/>} text={"Add boards"}/>}

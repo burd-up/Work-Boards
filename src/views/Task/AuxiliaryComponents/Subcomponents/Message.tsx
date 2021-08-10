@@ -12,22 +12,6 @@ const useStyles = makeStyles(() =>
     })
 );
 
-/*'h1'
-| 'h2'
-| 'h3'
-| 'h4'
-| 'h5'
-| 'h6'
-| 'subtitle1'
-| 'subtitle2'
-| 'body1'
-| 'body2'
-| 'caption'
-| 'button'
-| 'overline'
-| 'srOnly'
-| 'inherit'*/
-
 const Message: React.FC<messageType> = function (props: messageType) {
 
     const classes = useStyles();

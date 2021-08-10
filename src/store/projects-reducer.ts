@@ -18,10 +18,7 @@ const initialState: initialStateType = {
             description: 'This makes the changes in your file available to people you are working with.',
             priority: 7,
             status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
-            communication: [{id: 0, message: 'something words', whoRead: [2],
-                    author: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]}},
-                    {id: 0, message: 'something words 2 dfdfsdfs ererg jyhjtyu fgdfgr fgwer f fgrgrg fweq ', whoRead: [0],
-                    author: {id: 0, name: 'Roman', surname: 'Lukichev', position: 'frontend developer', accessLevel: 1, projects: [0]}}],
+            communication: [],
             developer: null,
             forReview: null,
             tester: null,
@@ -57,7 +54,7 @@ const initialState: initialStateType = {
     }, {
         id: 1,
         name: 'Shop online',
-        developersId: [0, 1, 2],
+        developersId: [3, 4, 5],
         tasks: [{
             id: 0,
             name: 'Create repository',
@@ -85,6 +82,38 @@ const initialState: initialStateType = {
             creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
         },
             ]
+    },{
+        id: 2,
+        name: 'New project',
+        developersId: [0, 1, 2],
+        tasks: [{
+            id: 0,
+            name: 'create project',
+            description: 'This makes the changes in your file available to people you are working with.',
+            priority: 7,
+            status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
+            communication: [],
+            developer: null,
+            forReview: null,
+            tester: null,
+            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+        },]
+    },{
+        id: 3,
+        name: 'New project 33',
+        developersId: [0, 1, 2],
+        tasks: [{
+            id: 0,
+            name: 'create project',
+            description: 'This makes the changes in your file available to people you are working with.',
+            priority: 7,
+            status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
+            communication: [],
+            developer: null,
+            forReview: null,
+            tester: null,
+            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+        },]
     }]
 }
 
@@ -127,9 +156,12 @@ export const projectSlice = createSlice({
             state.projects[indexProject].tasks[indexTask].status = 'development';
             state.projects[indexProject].tasks[indexTask].forReview = false;
         },
+        setCurrentProjectId: (state:initialStateType, action:{payload: {currentProject: number}}) => {
+            state.currentProjectId = action.payload.currentProject;
+        },
     },
 })
 
-export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage, takeTaskForRevision} = projectSlice.actions
+export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage, takeTaskForRevision, setCurrentProjectId} = projectSlice.actions
 
 export default projectSlice.reducer
