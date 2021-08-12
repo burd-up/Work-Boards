@@ -85,7 +85,7 @@ const initialState: initialStateType = {
     },{
         id: 2,
         name: 'New project',
-        developersId: [0, 1, 2],
+        developersId: [0, 1, 3],
         tasks: [{
             id: 0,
             name: 'create project',
@@ -112,7 +112,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]},
         },]
     }]
 }

@@ -11,7 +11,7 @@ type MapDispatchPropsType = {
 }
 type MapStatePropsType = {
     currentUser: userType
-    currentProjectId: number
+    currentProjectId: number | null
     projectsForUser: Array<projectType>
 }
 export type PropsListOfProjectsType = MapDispatchPropsType & MapStatePropsType

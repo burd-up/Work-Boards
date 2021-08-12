@@ -73,7 +73,7 @@ function DrawerMenu(props:DrawerMenuPropsType) {
             </Box>
             <List url={'/projects'} icon={<AccountTreeIcon/>} text={"Projects"}/>
             <List url={'/boards'} icon={<DashboardIcon/>} text={"Current project"}/>
-            <List url={'/boards'} icon={<ListAltIcon/>} text={"My tasks"}/>
+            <List url={'/currentTasks'} icon={<ListAltIcon/>} text={"My tasks"}/>
             {props.accessLevel === 3 && <List url={'/form'} icon={<PlaylistAddIcon/>} text={"Add tasks"}/>}
             {props.accessLevel === 3 && <List url={'/form'} icon={<NoteAddIcon/>} text={"Add boards"}/>}
         </Drawer>

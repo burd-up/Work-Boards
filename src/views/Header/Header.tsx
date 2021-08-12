@@ -10,6 +10,7 @@ import DrawerMenu from "./DrawerMenu/DrawerMenu";
 import UserSelectionMenu from "./UserSelectionMenu/UserSelectionMenu";
 import {HeaderPropsType} from "./HeaderContainer";
 
+
 const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(1),
@@ -40,7 +41,8 @@ const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
                     </Typography>
                     <Box>
                         <UserSelectionMenu users={props.users} setCurrentUser={props.setCurrentUser}
-                                           currentUser={props.currentUser}/>
+                                           currentUser={props.currentUser} currentProjectId={props.currentProjectId}
+                                           setCurrentProjectId={props.setCurrentProjectId}/>
                     </Box>
                 </Toolbar>
             </AppBar>
