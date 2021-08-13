@@ -39,3 +39,8 @@ export function userAccessibleTasksSelector(projects: Array<projectType>, curren
         return []
     }
 }
+
+export function currentProjectNameSelector(projects: Array<projectType>, currentProjectId: number| null) {
+    const currentProjectName = projects.filter(el => el.id === currentProjectId)[0].name
+    return currentProjectName
+}

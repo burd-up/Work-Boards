@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {projectType, userType} from '../types/types';
+import {projectType, taskType, userType} from '../types/types';
 
 export type initialStateType = {
     currentProjectId: number
@@ -159,9 +159,27 @@ export const projectSlice = createSlice({
         setCurrentProjectId: (state:initialStateType, action:{payload: {currentProject: number}}) => {
             state.currentProjectId = action.payload.currentProject;
         },
+        addNewTaskToProject: (state:initialStateType, action:{payload:
+                {currentUser: userType, name: string, description: string, priority: number}}) => {
+            let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
+            const newTask: taskType = {
+                id: state.projects[indexProject].tasks[state.projects[indexProject].tasks.length - 1].id + 1,
+                name: action.payload.name,
+                description: action.payload.description,
+                priority: action.payload.priority,
+                status: 'newTask', //development значит кто то взял задачу, testing - кто то тестирует, ready - готово
+                communication: [],
+                developer: null,
+                forReview: null,
+                tester: null,
+                creator: action.payload.currentUser,
+            }
+            state.projects[indexProject].tasks.push(newTask);
+        }
     },
 })
 
-export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage, takeTaskForRevision, setCurrentProjectId} = projectSlice.actions
+export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage,
+    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject} = projectSlice.actions
 
 export default projectSlice.reducer

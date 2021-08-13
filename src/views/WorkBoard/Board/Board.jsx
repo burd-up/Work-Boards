@@ -8,7 +8,8 @@ import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
     board: {
-        minHeight: "65vh",
+        height: "80vh",
+        overflow: "auto"
     },
 }));
 
