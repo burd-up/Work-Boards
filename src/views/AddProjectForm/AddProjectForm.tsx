@@ -1,20 +1,19 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {useForm} from "react-hook-form";
-import {FilledInput, Input, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import {AddProjectFormType} from "./AddProjectFormContainer";
 import {makeStyles} from "@material-ui/core/styles";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import SelectionOfMultipleUsers from "./SelectionOfMultipleUsers";
+import {userType} from "../../types/types";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        marginTop: 10,
+        marginTop: 20,
     },
     button: {
         marginLeft: "auto"
@@ -25,6 +24,12 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
 
     const classes = useStyles();
 
+    const [selectedUsers, setSelectedUsers] = useState<Array<userType>>([props.currentUser])
+
+    const [isError, setIsError] = useState(false)
+
+    const [submited, setSubmited] = useState(false)
+
     const {
         register,
         formState: {errors},
@@ -32,53 +37,56 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
         reset,
     } = useForm({mode: 'onChange'});
 
+    useEffect(() => {
+        selectedUsers.length === 0 && submited || !selectedUsers.map(el => el.id).includes(props.currentUser.id)
+            ? setIsError(true) : setIsError(false)
+    }, [selectedUsers])
+
     type formDataType = {
         name: string
-        description: string
-        priority: number
     }
 
     const onSubmit = (formData: formDataType) => {
-        props.addNewTaskToProject({
-            currentUser: props.currentUser, name: formData.name,
-            description: formData.description, priority: formData.priority
-        })
-        reset();
+        setSubmited(true)
+        if (selectedUsers.length === 0 || !selectedUsers.map(el => el.id).includes(props.currentUser.id)) {
+            setIsError(true)
+        } else {
+            props.addNewProject({name: formData.name, developersId: selectedUsers.map(el => el.id)})
+            reset()
+            setSelectedUsers([])
+            setSubmited(false)
+            setIsError(false)
+        }
+
     }
 
 
     return (
         <div>
-            <Typography variant={'h6'} color={'primary'}>{`Сreating a task for the project: "${props.currentProjectName}"`}</Typography>
-            {props.currentUser.accessLevel === 3?
-        <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-            <Container className={classes.container}>
-                <SelectionOfMultipleUsers {...props}/>
-              {/*  <Grid spacing={2} container>
-                    <Grid item xs={8} md={10}><TextField variant={"outlined"} fullWidth required
-                                                         error={errors.name ? true : false}
-                                                         helperText={errors.name ? 'enter task name' : null}
-                                                         {...register('name', {required: true})} name={'name'} label="name"/>
-                                                         <br/></Grid>
-                    <Grid item xs={4} md={2}><TextField variant={"outlined"} fullWidth
-                                                        required {...register('priority', {required: true, max: 10})}
-                                                        error={errors.priority ? true : false} type={'number'}
-                                                        helperText={errors.priority ? 'should be a value between 1 and 10' : null}
-                                                        name={'priority'} label="priority"/>
-                                                        <br/></Grid>
-                    <Grid item xs={12}><TextField variant={"outlined"} fullWidth
-                                                  required {...register('description', {required: true})}
-                                                  error={errors.description ? true : false}
-                                                  helperText={errors.description ? 'enter task description' : null}
-                                                  name={'description'} label="description"/>
-                                                  <br/></Grid>
-                </Grid>*/}
-                <Button className={classes.container} color={'primary'} size={"large"} type={'submit'}
-                        variant={"contained"}>
-                    create a new task
-                </Button>
-            </Container>
-        </form> : <Redirect to={'/projects'}/>}
+            <Typography variant={'h6'}
+                        color={'primary'}>{`Сreating a project`}</Typography>
+            {props.currentUser.accessLevel === 3 ?
+                <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+                    <Container className={classes.container}>
+                        <Grid spacing={2} container>
+                            <Grid item xs={12} md={12}><TextField variant={"outlined"} fullWidth required
+                                                                  error={errors.name ? true : false}
+                                                                  helperText={errors.name ? 'enter task name' : null}
+                                                                  {...register('name', {required: true})}
+                                                                  name={'name'}
+                                                                  label="name of project"/>
+                                <br/></Grid>
+                            <Grid item xs={12} md={12}>
+                                <SelectionOfMultipleUsers {...props} isError={isError} selectedUsers={selectedUsers}
+                                                          setSelectedUsers={setSelectedUsers}/>
+                            </Grid>
+                        </Grid>
+                        <Button className={classes.container} color={'primary'} size={"large"} type={'submit'}
+                                variant={"contained"}>
+                            create a new project
+                        </Button>
+                    </Container>
+                </form> : <Redirect to={'/projects'}/>}
         </div>
     );
 }

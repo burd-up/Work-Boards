@@ -163,7 +163,9 @@ export const projectSlice = createSlice({
                 {currentUser: userType, name: string, description: string, priority: number}}) => {
             let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
             const newTask: taskType = {
-                id: state.projects[indexProject].tasks[state.projects[indexProject].tasks.length - 1].id + 1,
+                id: state.projects[indexProject].tasks.length !==0?
+                    state.projects[indexProject].tasks[state.projects[indexProject].tasks.length - 1].id + 1
+                    : 0,
                 name: action.payload.name,
                 description: action.payload.description,
                 priority: action.payload.priority,
@@ -175,11 +177,21 @@ export const projectSlice = createSlice({
                 creator: action.payload.currentUser,
             }
             state.projects[indexProject].tasks.push(newTask);
+        },
+        addNewProject: (state:initialStateType, action:{payload:{name: string, developersId: Array<number>}}) => {
+            const newProject:projectType = {
+                id: state.projects[state.projects.length-1].id + 1,
+                name: action.payload.name,
+                developersId: action.payload.developersId,
+                tasks: []
+            }
+            state.projects.push(newProject)
         }
     },
+
 })
 
 export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage,
-    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject} = projectSlice.actions
+    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject, addNewProject} = projectSlice.actions
 
 export default projectSlice.reducer

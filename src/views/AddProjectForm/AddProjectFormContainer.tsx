@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addNewTaskToProject} from '../../store/projects-reducer';
+import {addNewTaskToProject, addNewProject} from '../../store/projects-reducer';
 import {RootState} from "../../store/store";
 import {taskType, userType} from "../../types/types";
 import {currentProjectNameSelector} from "../../utils/selectors/currentProject-selector";
@@ -13,7 +13,7 @@ type MapStateToProps = {
     currentProjectName: string
 }
 type MapDispatchToProps = {
-    addNewTaskToProject: (payload: {currentUser: userType, name: string, description: string, priority: number}) => void
+    addNewProject: (payload: {name: string, developersId: Array<number>}) => void
 }
 export type AddProjectFormType = MapStateToProps & MapDispatchToProps;
 
@@ -27,4 +27,4 @@ let mapStateToProps = (state: RootState) => {
 }
 
 export default connect<MapStateToProps, MapDispatchToProps, {}, RootState>(mapStateToProps,
-    {addNewTaskToProject})(AddProjectForm)
+    {addNewProject})(AddProjectForm)

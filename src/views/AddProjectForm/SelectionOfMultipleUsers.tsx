@@ -1,43 +1,62 @@
-import React, {useEffect, useMemo, useState} from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import {useForm} from "react-hook-form";
-import {FilledInput, Input, Typography} from '@material-ui/core';
+import React from "react";
+import {Avatar, Chip, Paper, Typography} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import {AddProjectFormType} from "./AddProjectFormContainer";
 import {makeStyles} from "@material-ui/core/styles";
-import { Redirect } from "react-router-dom";
 import ListOfUsers from "./ListOfUsers/ListOfUsers";
 import {userType} from "../../types/types";
 
 const useStyles = makeStyles((theme) => ({
-    container: {
-        margin: 10,
+    paper: {
+        padding: 5,
+        minHeight: 32,
     },
-    button: {
-        marginLeft: "auto"
-    }
+
 }));
 
-const SelectionOfMultipleUsers: React.FC<AddProjectFormType> = function (props: AddProjectFormType) {
+type selectionOfMultipleUsersPropsType = AddProjectFormType & {
+    selectedUsers: Array<userType> | never[]
+    setSelectedUsers: (arg0: Array<userType> | never[]) => void
+    isError: boolean
+}
+
+const SelectionOfMultipleUsers: React.FC<selectionOfMultipleUsersPropsType>
+    = function ({selectedUsers,setSelectedUsers, isError,...props}: selectionOfMultipleUsersPropsType) {
 
     const classes = useStyles();
 
-    const [selectedUsers, setSelectedUsers] = useState<Array<userType> | never[]>([])
-
-    const addSelectUser = (arg0: Array<userType> | never[]) => {setSelectedUsers(arg0)}
-
-    useEffect(() => {
-    });
+    const selectedUsersView = selectedUsers.map(el =>
+        <Grid item>
+            <Chip
+                avatar={<Avatar>{el.name.split('')[0]}{el.surname.split('')[0]}</Avatar>}
+                label={`${el.name} ${el.surname} (${el.position})`}
+                color="primary"
+                clickable
+                onDelete={() => setSelectedUsers([...selectedUsers.filter(user => el.id !== user.id)])}
+            /></Grid>)
 
     return (
-                <ListOfUsers users={props.users} currentUser={props.currentUser}
-                             currentProjectId={props.currentProjectId} setSelectedUsers={addSelectUser}
+        <Grid container spacing={1} direction={'row'} alignItems={"flex-start"}>
+            <Grid item xs={9} md={10}>
+                <Paper className={classes.paper}>
+                    {selectedUsers.length === 0 ? <Typography variant={'subtitle1'}
+                                                              color={'textSecondary'}
+                                                              align={'left'}>select workers for the project *</Typography>
+                        : <Grid container spacing={1} direction={'row'}>
+                            {selectedUsersView}
+                        </Grid>
+                    }
+                </Paper>
+            </Grid>
+            <Grid item xs={3} md={2}>
+                <ListOfUsers users={props.users}
+                             setSelectedUsers={setSelectedUsers}
                              selectedUsers={selectedUsers}/>
-
+            </Grid>
+            {isError && <Typography variant={'caption'}
+                        color={isError? 'error':'textSecondary'}
+                        align={'right'}>select workers for the project (you must be on the list)</Typography>}
+        </Grid>
     );
 }
 

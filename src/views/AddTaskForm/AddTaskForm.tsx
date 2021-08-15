@@ -13,7 +13,7 @@ import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        margin: 10,
+        marginTop: 10,
     },
     button: {
         marginLeft: "auto"
