@@ -27,8 +27,17 @@ export function tasksInProjectForUserSelector(projects: Array<projectType>, curr
     return tasksForUser
 }
 
+// возвращает массив доступных для пользователя новых задач
 export function userAccessibleTasksSelector(projects: Array<projectType>, currentUser: userType, currentProject: number| null) {
-    if (currentUser.accessLevel === 1) {
+    const accessibleDeveloperTasks = currentUser.accesses.includes(1)
+        ?projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.status === 'newTask')
+        :[]
+    const accessibleTesterTasks = currentUser.accesses.includes(2)
+        ?projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.tester === null && el.forReview === true )
+        :[]
+    return [...accessibleDeveloperTasks, ...accessibleTesterTasks]
+
+/*    if (currentUser.accessLevel === 1) {
         return  projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.status === 'newTask')
     } else if(currentUser.accessLevel === 2) {
         return projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.tester === null && el.forReview === true )
@@ -37,7 +46,7 @@ export function userAccessibleTasksSelector(projects: Array<projectType>, curren
             || (el.forReview && el.tester === null && el.developer?.id !== currentUser.id))
     } else {
         return []
-    }
+    }*/
 }
 
 export function currentProjectNameSelector(projects: Array<projectType>, currentProjectId: number| null) {

@@ -22,7 +22,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]},
+            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accesses: [1,2,3], projects: [0,3]},
         }, {
             id: 1,
             name: 'Create React app',
@@ -36,7 +36,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]},
+            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accesses: [1,2,3], projects: [0,3]},
         },
             {
                 id: 2,
@@ -49,7 +49,7 @@ const initialState: initialStateType = {
                 developer: null,
                 forReview: null,
                 tester: null,
-                creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]},
+                creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accesses: [1,2,3], projects: [0,3]},
             },]
     }, {
         id: 1,
@@ -65,7 +65,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accesses: [1,2,3], projects: [1,2]},
         }, {
             id: 1,
             name: 'Create React app',
@@ -79,7 +79,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accesses: [1,2,3], projects: [1,2]},
         },
             ]
     },{
@@ -96,7 +96,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accessLevel: 3, projects: [1]},
+            creator: {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accesses: [1,2,3], projects: [1,2]},
         },]
     },{
         id: 3,
@@ -112,7 +112,7 @@ const initialState: initialStateType = {
             developer: null,
             forReview: null,
             tester: null,
-            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accessLevel: 3, projects: [0]},
+            creator: {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accesses: [1,2,3], projects: [0,3]},
         },]
     }]
 }

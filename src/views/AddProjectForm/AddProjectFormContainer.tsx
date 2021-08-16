@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addNewTaskToProject, addNewProject} from '../../store/projects-reducer';
+import {addNewProject} from '../../store/projects-reducer';
 import {RootState} from "../../store/store";
-import {taskType, userType} from "../../types/types";
+import {userType} from "../../types/types";
 import {currentProjectNameSelector} from "../../utils/selectors/currentProject-selector";
 import AddProjectForm from "./AddProjectForm";
 

@@ -49,7 +49,7 @@ const AddTaskForm: React.FC<AddTaskFormType> = function (props: AddTaskFormType)
     return (
         <div>
             <Typography variant={'h6'} color={'primary'}>{`Сreating a task for the project: "${props.currentProjectName}"`}</Typography>
-            {props.currentUser.accessLevel === 3?
+            {props.currentUser.accesses.includes(3)?
         <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
             <Container className={classes.container}>
                 <Grid spacing={2} container>

@@ -6,17 +6,26 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import indigo from "@material-ui/core/colors/indigo";
 import {HeaderPropsType} from "../HeaderContainer";
+import {userType} from "../../../types/types";
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        color: "white",
+        color: theme.palette.primary.contrastText,
     },
     menuItem: {
         backgroundColor: indigo[100],
     }
 }));
 
-const UserSelectionMenu: React.FC<HeaderPropsType> = function ({setCurrentUser, setCurrentProjectId, currentUser, users, currentProjectId, ...props}:HeaderPropsType) {
+type UserSelectionMenuPropsType = {
+    setCurrentUser: (payload: userType) => void
+    setCurrentProjectId: (payload: {currentProject: number}) => void
+    users: Array<userType>
+    currentUser: userType
+    currentProjectId: number
+}
+
+const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCurrentUser, setCurrentProjectId, currentUser, users, currentProjectId, ...props}:UserSelectionMenuPropsType) {
     const classes = useStyles();
 
     const listOfUsers = users.map(el => <MenuItem className={currentUser.id === el.id? classes.menuItem : ''}

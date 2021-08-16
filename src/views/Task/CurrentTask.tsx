@@ -19,7 +19,7 @@ const CurrentTask: React.FC<PropsType> = function (props:PropsType ) {
         <Card>
             <TaskContent {...props.task}/>
             <Box display={'flex'} justifyContent="flex-end" m={1}>
-                {props.currentUser.accessLevel !== 2 &&
+                {props.currentUser.accesses.includes(1) &&
                 <Button color='primary'
                         onClick={() => props.takeTaskForDevelopment({developer: props.currentUser, taskId: props.task.id})}
                         endIcon={<LibraryAddOutlinedIcon/>}

@@ -21,7 +21,7 @@ export type userType = {
     name: string
     surname: string
     position: string
-    accessLevel: number
+    accesses: Array<number>
     projects: Array<number>
 }
 export type messageType = {
@@ -29,4 +29,13 @@ export type messageType = {
     message: string
     author: userType
     whoRead: Array<number>
+}
+export type colorsThemeType = {
+    name: string
+    primary: {
+        main: string
+    },
+    secondary: {
+        main: string
+    },
 }

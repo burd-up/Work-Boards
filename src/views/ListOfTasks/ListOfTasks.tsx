@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ListOfTasks: React.FC<PropsListOfTasksType> = function (props: PropsListOfTasksType) {
 
+    // переменная необходимая для переключения между типами задач см. документацию material.ui
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {

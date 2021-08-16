@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 
-
 const useStyles = makeStyles((theme) => ({
     board: {
         height: "80vh",
@@ -13,7 +12,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Board(props) {
+type BoardPropsType = {
+    title: string
+    tasks: Array<object>
+}
+
+const Board: React.FC<BoardPropsType> = function(props: BoardPropsType) {
 
     const classes = useStyles();
 

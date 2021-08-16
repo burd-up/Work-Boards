@@ -24,10 +24,13 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
 
     const classes = useStyles();
 
+    // массив пользователей которые будут работать над проектом
     const [selectedUsers, setSelectedUsers] = useState<Array<userType>>([props.currentUser])
 
+    // индикатор что массив пользователей не удовлетворительный (не содержит создателя или пустой)
     const [isError, setIsError] = useState(false)
 
+    // индикатор того отправлялись данные формы или нет хотя бы один раз
     const [submited, setSubmited] = useState(false)
 
     const {
@@ -37,8 +40,9 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
         reset,
     } = useForm({mode: 'onChange'});
 
+    // проверяем массив пользователей после каждого его изменения, испровляя в зависимости от этого isError
     useEffect(() => {
-        selectedUsers.length === 0 && submited || !selectedUsers.map(el => el.id).includes(props.currentUser.id)
+        selectedUsers.length === 0 && (submited || !selectedUsers.map(el => el.id).includes(props.currentUser.id))
             ? setIsError(true) : setIsError(false)
     }, [selectedUsers])
 
@@ -65,7 +69,8 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
         <div>
             <Typography variant={'h6'}
                         color={'primary'}>{`Сreating a project`}</Typography>
-            {props.currentUser.accessLevel === 3 ?
+            {/*проверяем есть ли у пользователя доступ к созданию проектов*/}
+            {props.currentUser.accesses.includes(3) ?
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <Container className={classes.container}>
                         <Grid spacing={2} container>

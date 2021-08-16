@@ -40,6 +40,7 @@ const RunningTask: React.FC<PropsType> = function (props: PropsType) {
         <Card>
             <TaskContent {...props.task}/>
             <Box display={'flex'} justifyContent="space-between" alignContent={'center'} m={1}>
+                {/*кнопка вызова окна сообщений*/}
                     {(props.currentUser.id === props.task.developer?.id ||
                         props.currentUser.id === props.task.tester?.id ||
                         props.currentUser.id === props.task.creator?.id)
@@ -48,13 +49,15 @@ const RunningTask: React.FC<PropsType> = function (props: PropsType) {
                         {<MessageOutlinedIcon color={'primary'}/>}
                     </Button>
                     }
+                {/*кнопка подтверждения что задача готова к проверке*/}
                     {(props.currentUser.id === props.task.developer?.id && !props.task.forReview)
                     && <Button color={'primary'}
                                onClick={() => props.giveTaskForReview({taskId: props.task.id})}
                                endIcon={<ExitToAppIcon/>}
                                size="medium">ready for review</Button>
                     }
-                    {(props.currentUser.id !== props.task.developer?.id && props.task.forReview && props.currentUser.accessLevel !== 1)
+                {/*кнопка для взятия задачи на проверку (разработчик не может брать свою задачу на проверку)*/}
+                    {(props.currentUser.id !== props.task.developer?.id && props.task.forReview && props.currentUser.accesses.includes(2))
                     && <Button color={'primary'}
                                onClick={() => props.takeTaskForReview({
                                    tester: props.currentUser,

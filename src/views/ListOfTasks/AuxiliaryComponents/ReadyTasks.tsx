@@ -19,7 +19,7 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function (props: Available
 
     const classes = useStyles()
 
-    const tasks = props.tasksOfUser.map(el => {
+    const readyTasks = props.tasksOfUser.map(el => {
             if(el.status === 'ready') {
                 return(
                     <Grid item xs={12} md={6}><CompletedTask task={el} currentUser={props.currentUser}
@@ -32,7 +32,7 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function (props: Available
         <div hidden={props.value !== props.index} className={classes.container}>
             {props.value === props.index && (
                 <Grid container spacing={2}>
-                    {tasks}
+                    {readyTasks}
                 </Grid>
             )}
         </div>

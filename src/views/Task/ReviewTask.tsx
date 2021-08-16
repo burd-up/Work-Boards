@@ -28,6 +28,7 @@ const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
             />
             <Box display={'flex'} justifyContent="space-between" m={1}>
                 <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
+                    {/*кнопка вызова окна сообщений*/}
                     {(props.currentUser.id === props.task.developer?.id ||
                         props.currentUser.id === props.task.tester?.id ||
                         props.currentUser.id === props.task.creator?.id)
@@ -36,11 +37,13 @@ const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
                         {<MessageOutlinedIcon color={'primary'}/>}
                     </Button>
                     }
+                    {/*кнопка отправки задачи на доработку*/}
                     {props.task.tester?.id === props.currentUser.id
                     && <Button color={'secondary'} onClick={() => props.takeTaskForRevision({taskId: props.task.id})}
                                endIcon={<RateReviewOutlinedIcon/>}
                                size="medium">revision</Button>
                     }
+                    {/*кнопка одобрения задачи*/}
                     {props.task.tester?.id === props.currentUser.id
                     && <Button color={'primary'}
                                onClick={() => props.approveTask({taskId: props.task.id})}

@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import DrawerMenu from "./DrawerMenu/DrawerMenu";
 import UserSelectionMenu from "./UserSelectionMenu/UserSelectionMenu";
 import {HeaderPropsType} from "./HeaderContainer";
+import ColorSelectionMenu from "./ColorSelectionMenu/ColorSelectionMenu";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +29,8 @@ const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
 
     return (
         <Box width={'100%'}>
-            <DrawerMenu accessLevel={props.currentUser.accessLevel} isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu}/>
+            <DrawerMenu currentProject={props.currentProject} accesses={props.currentUser.accesses}
+                        isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu}/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton}
@@ -39,7 +41,9 @@ const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
                     <Typography align={'left'} variant="h6" className={classes.title}>
                         WorkBoards
                     </Typography>
-                    <Box>
+                    <Box display={"flex"} alignItems="center">
+                        <ColorSelectionMenu colors={props.colors} currentColor={props.currentColor}
+                                            setCurrentColor={props.setCurrentColor} setColor={props.setColor}/>
                         <UserSelectionMenu users={props.users} setCurrentUser={props.setCurrentUser}
                                            currentUser={props.currentUser} currentProjectId={props.currentProjectId}
                                            setCurrentProjectId={props.setCurrentProjectId}/>

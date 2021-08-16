@@ -14,11 +14,13 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import {NavLink} from "react-router-dom";
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import {projectType} from "../../../types/types";
 
 type DrawerMenuPropsType = {
-    accessLevel: number
+    accesses: Array<number>
     isOpenLeftMenu: boolean
     setIsOpenLeftMenu: (arg: boolean) => void
+    currentProject: projectType
 }
 type ListPropsType = {
     url: string
@@ -34,12 +36,11 @@ const useStyles = makeStyles({
         textDecoration: "none"
     },
     fullList: {
-        width: 'auto',
+        width: 180,
+        height: 25,
+        overflow: "hidden",
+        textOverflow: "ellipsis"
     },
-    title: {
-        display: 'flex',
-        justifyContent: 'space-between'
-    }
 });
 
 const List = (props: ListPropsType) => {
@@ -56,12 +57,14 @@ const List = (props: ListPropsType) => {
 }
 
 function DrawerMenu(props:DrawerMenuPropsType) {
+    const classes = useStyles();
 
     return (
         <Drawer variant={'persistent'} open={props.isOpenLeftMenu}>
             <Box display="flex" p={1}>
                 <Box alignSelf={'center'} flexGrow={1} p={1}>
-                    <Typography variant="subtitle1">WorkBoards v0.01</Typography>
+                    <Typography className={classes.fullList} variant="subtitle1" color={"primary"}>{props.currentProject.name}</Typography>
+                    <Typography variant="caption">WorkBoards v0.01</Typography>
                 </Box>
                 <Box p={1} alignSelf={'center'} justifyContent="flex-end">
                     <IconButton edge="start"
@@ -74,8 +77,8 @@ function DrawerMenu(props:DrawerMenuPropsType) {
             <List url={'/projects'} icon={<AccountTreeIcon/>} text={"Projects"}/>
             <List url={'/currentProject'} icon={<DashboardIcon/>} text={"Current project"}/>
             <List url={'/currentTasks'} icon={<ListAltIcon/>} text={"My tasks"}/>
-            {props.accessLevel === 3 && <List url={'/addTaskForm'} icon={<PlaylistAddIcon/>} text={"Add tasks"}/>}
-            {props.accessLevel === 3 && <List url={'/addProjectForm'} icon={<NoteAddIcon/>} text={"Add project"}/>}
+            {props.accesses.includes(3) && <List url={'/addTaskForm'} icon={<PlaylistAddIcon/>} text={"Add tasks"}/>}
+            {props.accesses.includes(3) && <List url={'/addProjectForm'} icon={<NoteAddIcon/>} text={"Add project"}/>}
         </Drawer>
     );
 }

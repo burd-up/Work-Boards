@@ -8,6 +8,7 @@ const useStyles = makeStyles(() =>
     createStyles({
         message: {
             maxWidth: '20vw',
+            minWidth: 250
         },
     })
 );
