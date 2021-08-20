@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import {projectType, taskType, userType} from '../types/types';
 
 export type initialStateType = {
-    currentProjectId: number
+    currentProjectId: number | null
     projects: Array<projectType>
 }
 
@@ -11,7 +11,7 @@ const initialState: initialStateType = {
     projects: [{
         id: 0,
         name: 'Task management system',
-        developersId: [0, 1, 2],
+        developersId: [0, 1, 2, 6],
         tasks: [{
             id: 0,
             name: 'Create repository',
@@ -54,7 +54,7 @@ const initialState: initialStateType = {
     }, {
         id: 1,
         name: 'Shop online',
-        developersId: [3, 4, 5],
+        developersId: [3, 4, 5, 6],
         tasks: [{
             id: 0,
             name: 'Create repository',
@@ -85,7 +85,7 @@ const initialState: initialStateType = {
     },{
         id: 2,
         name: 'New project',
-        developersId: [0, 1, 3],
+        developersId: [0, 1, 3, 6],
         tasks: [{
             id: 0,
             name: 'create project',
@@ -101,7 +101,7 @@ const initialState: initialStateType = {
     },{
         id: 3,
         name: 'New project 33',
-        developersId: [0, 1, 2],
+        developersId: [0, 1, 2, 6,],
         tasks: [{
             id: 0,
             name: 'create project',
@@ -156,7 +156,7 @@ export const projectSlice = createSlice({
             state.projects[indexProject].tasks[indexTask].status = 'development';
             state.projects[indexProject].tasks[indexTask].forReview = false;
         },
-        setCurrentProjectId: (state:initialStateType, action:{payload: {currentProject: number}}) => {
+        setCurrentProjectId: (state:initialStateType, action:{payload: {currentProject: number | null}}) => {
             state.currentProjectId = action.payload.currentProject;
         },
         addNewTaskToProject: (state:initialStateType, action:{payload:

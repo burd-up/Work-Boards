@@ -56,6 +56,11 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
             setIsError(true)
         } else {
             props.addNewProject({name: formData.name, developersId: selectedUsers.map(el => el.id)})
+            props.addProjectInArrayOfUsers(
+                {
+                    users: selectedUsers.map(el => el.id),
+                    projectId: props.projects[props.projects.length-1].id + 1 //id позже нужно будет лучше ораганизовать
+                })
             reset()
             setSelectedUsers([])
             setSubmited(false)
@@ -70,7 +75,7 @@ const AddProjectForm: React.FC<AddProjectFormType> = function (props: AddProject
             <Typography variant={'h6'}
                         color={'primary'}>{`Сreating a project`}</Typography>
             {/*проверяем есть ли у пользователя доступ к созданию проектов*/}
-            {props.currentUser.accesses.includes(3) ?
+            {props.currentUser.accesses.includes(4) ?
                 <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
                     <Container className={classes.container}>
                         <Grid spacing={2} container>

@@ -9,8 +9,8 @@ import {currentProjectNameSelector} from "../../utils/selectors/currentProject-s
 type MapStateToProps = {
     users: Array<userType>
     currentUser: userType
-    currentProjectId: number
-    currentProjectName: string
+    currentProjectId: number | null
+    currentProjectName: string | null
 }
 type MapDispatchToProps = {
     addNewTaskToProject: (payload: {currentUser: userType, name: string, description: string, priority: number}) => void

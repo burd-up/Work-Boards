@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const WorkBoard: React.FC<PropsWorkBoardType> = function(props: PropsWorkBoardType) {
+const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardType) {
 
     const classes = useStyles();
 
@@ -50,21 +50,24 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function(props: PropsWorkBoardTy
 
     return (
         <div>
-        <Typography align={'center'} variant="h6" color={'primary'}>{props.currentProject.name}</Typography>
-        <Grid container spacing={2} justifyContent="center" className={classes.workBoard}>
-            <Grid item xs={12} md={6}>
-                <Board title={'Current tasks'}  tasks={currentTasks}/>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Board title={'Running tasks'} tasks={runningTasks}/>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Board title={'Tasks under review'} tasks={reviewTasks}/>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <Board title={'Completed tasks'} tasks={completedTasks}/>
-            </Grid>
-        </Grid>
+            <Typography align={'center'} variant="h6"
+                        color={'primary'}>
+                {props.currentProject?.name || 'select the current project in the projects section'}</Typography>
+            {props.currentProject &&
+            <Grid container spacing={2} justifyContent="center" className={classes.workBoard}>
+                <Grid item xs={12} md={6}>
+                    <Board title={'Current tasks'} tasks={currentTasks}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Board title={'Running tasks'} tasks={runningTasks}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Board title={'Tasks under review'} tasks={reviewTasks}/>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Board title={'Completed tasks'} tasks={completedTasks}/>
+                </Grid>
+            </Grid>}
         </div>
     );
 }

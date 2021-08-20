@@ -10,6 +10,7 @@ import AddProjectFormContainer from "./views/AddProjectForm/AddProjectFormContai
 import WorkBoardContainer from "./views/WorkBoard/WorkBoardContainer";
 import {createTheme} from '@material-ui/core/styles';
 import {ThemeProvider} from "@material-ui/core";
+import AddUserFormContainer from "./views/AddUserForm/AddUserFormContainer";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
                         <Route path='/projects' render={() => <ListOfProjectsContainer/>}/>
                         <Route path='/addTaskForm' render={() => <AddTaskFormContainer/>}/>
                         <Route path='/addProjectForm' render={() => <AddProjectFormContainer/>}/>
+                        <Route path='/addUserForm' render={() => <AddUserFormContainer/>}/>
                     </Container>
                 </Switch>
             </ThemeProvider>

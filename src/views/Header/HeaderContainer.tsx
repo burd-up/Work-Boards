@@ -16,14 +16,14 @@ type OwnProps = {
 type MapStateToProps = {
     users: Array<userType>
     currentUser: userType
-    currentProjectId: number
+    currentProjectId: number | null
     colors: Array<colorsThemeType>
     currentColor: colorsThemeType
-    currentProject: projectType
+    currentProject: projectType | null
 }
 type MapDispatchToProps = {
     setCurrentUser: (payload: userType) => void
-    setCurrentProjectId: (payload: {currentProject: number}) => void
+    setCurrentProjectId: (payload: {currentProject: number | null}) => void
     setCurrentColor: (payload: {name: string}) => void
 }
 export type HeaderPropsType = MapStateToProps & MapDispatchToProps & OwnProps;

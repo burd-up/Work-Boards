@@ -14,15 +14,19 @@ const useStyles = makeStyles((theme) => ({
     },
     menuItem: {
         backgroundColor: indigo[100],
+    },
+    list: {
+        maxHeight: 500,
+        overflow: "auto",
     }
 }));
 
 type UserSelectionMenuPropsType = {
     setCurrentUser: (payload: userType) => void
-    setCurrentProjectId: (payload: {currentProject: number}) => void
+    setCurrentProjectId: (payload: {currentProject: number | null}) => void
     users: Array<userType>
     currentUser: userType
-    currentProjectId: number
+    currentProjectId: number | null
 }
 
 const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCurrentUser, setCurrentProjectId, currentUser, users, currentProjectId, ...props}:UserSelectionMenuPropsType) {
@@ -31,7 +35,10 @@ const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCu
     const listOfUsers = users.map(el => <MenuItem className={currentUser.id === el.id? classes.menuItem : ''}
                                                   onClick={() => {
                                                       setCurrentUser(el);
-                                                      setCurrentProjectId({currentProject: el.projects.includes(currentProjectId)? currentProjectId : el.projects[0]});
+                                                      setCurrentProjectId(
+                                                          el.projects.length === 0
+                                                              ? {currentProject: null}
+                                                              : {currentProject: el.projects.includes(currentProjectId)? currentProjectId : el.projects[0]});
                                                       handleClose()
                                                   }}>
         {`${el.name} ${el.surname} (${el.position})`}
@@ -56,6 +63,7 @@ const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCu
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                className={classes.list}
             >
                 {listOfUsers}
             </Menu>

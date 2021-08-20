@@ -21,7 +21,7 @@ type MapDispatchPropsType = {
 
 type MapStatePropsType = {
     currentUser: userType
-    currentProject: projectType
+    currentProject: projectType| null
     currentTasks: Array<taskType>
     runningTasks: Array<taskType>
     reviewTasks: Array<taskType>
@@ -33,10 +33,10 @@ let mapStateToProps = (state:RootState): MapStatePropsType => {
     return {
         currentUser: state.users.currentUser,
         currentProject: currentProjectSelector(state.projects.projects, state.projects.currentProjectId),
-        currentTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId).tasks, 'newTask'),
-        runningTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId).tasks, 'development'),
-        reviewTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId).tasks, 'testing'),
-        completedTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId).tasks, 'ready'),
+        currentTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId), 'newTask'),
+        runningTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId), 'development'),
+        reviewTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId), 'testing'),
+        completedTasks: selectTasksByStatus(currentProjectSelector(state.projects.projects, state.projects.currentProjectId), 'ready'),
     }
 }
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState>

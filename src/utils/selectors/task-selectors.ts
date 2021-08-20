@@ -1,8 +1,8 @@
-import {taskType} from "../../types/types";
+import {projectType, taskType} from "../../types/types";
 
 type statusType = 'newTask'|'development'|'testing'|'ready'
 
-export function selectTasksByStatus(tasks: Array<taskType>, status:statusType) {
-    const selectedTask = tasks.filter(el => el.status === status);
+export function selectTasksByStatus(project: projectType | null, status:statusType) {
+    const selectedTask = project? project.tasks.filter(el => el.status === status): [];
     return selectedTask
 }

@@ -22,7 +22,7 @@ export type userType = {
     surname: string
     position: string
     accesses: Array<number>
-    projects: Array<number>
+    projects: Array<any>
 }
 export type messageType = {
     id: number

@@ -15,12 +15,14 @@ import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import {NavLink} from "react-router-dom";
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import {projectType} from "../../../types/types";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 type DrawerMenuPropsType = {
     accesses: Array<number>
     isOpenLeftMenu: boolean
     setIsOpenLeftMenu: (arg: boolean) => void
-    currentProject: projectType
+    currentProject: projectType | null
+    currentProjectId: number | null
 }
 type ListPropsType = {
     url: string
@@ -63,7 +65,10 @@ function DrawerMenu(props:DrawerMenuPropsType) {
         <Drawer variant={'persistent'} open={props.isOpenLeftMenu}>
             <Box display="flex" p={1}>
                 <Box alignSelf={'center'} flexGrow={1} p={1}>
-                    <Typography className={classes.fullList} variant="subtitle1" color={"primary"}>{props.currentProject.name}</Typography>
+
+                    <Typography className={classes.fullList} variant="subtitle1" color={"primary"}>
+                        {props.currentProjectId === null? "no projects available" : props.currentProject?.name}
+                    </Typography>
                     <Typography variant="caption">WorkBoards v0.01</Typography>
                 </Box>
                 <Box p={1} alignSelf={'center'} justifyContent="flex-end">
@@ -78,7 +83,8 @@ function DrawerMenu(props:DrawerMenuPropsType) {
             <List url={'/currentProject'} icon={<DashboardIcon/>} text={"Current project"}/>
             <List url={'/currentTasks'} icon={<ListAltIcon/>} text={"My tasks"}/>
             {props.accesses.includes(3) && <List url={'/addTaskForm'} icon={<PlaylistAddIcon/>} text={"Add tasks"}/>}
-            {props.accesses.includes(3) && <List url={'/addProjectForm'} icon={<NoteAddIcon/>} text={"Add project"}/>}
+            {props.accesses.includes(4) && <List url={'/addProjectForm'} icon={<NoteAddIcon/>} text={"Add project"}/>}
+            {props.accesses.includes(5) && <List url={'/addUserForm'} icon={<PersonAddIcon/>} text={"Add user"}/>}
         </Drawer>
     );
 }

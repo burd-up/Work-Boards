@@ -20,7 +20,9 @@ const ListOfProjects: React.FC<PropsListOfProjectsType> = function (props: Props
 
     return (
         <Container>
-            <Typography variant={'h6'} color={'primary'}>Select the project you want to work on</Typography>
+            <Typography variant={'h6'} color={'primary'}>
+                {props.currentUser.projects.length === 0 ? 'you are not involved in any of the projects' : 'Select the project you want to work on'}
+            </Typography>
             {projects}
         </Container>
     );

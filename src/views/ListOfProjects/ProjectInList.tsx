@@ -10,7 +10,7 @@ import {projectType, taskType, userType} from "../../types/types";
 type ProjectInListPropsType = {
     currentProjectId: number | null
     project: projectType
-    setCurrentProjectId: (payload: {currentProject: number}) => void
+    setCurrentProjectId: (payload: { currentProject: number }) => void
     currentUser: userType
     tasksOfUser: Array<taskType>
     userAccessibleTasks: Array<taskType>
@@ -35,27 +35,28 @@ const ProjectInList: React.FC<ProjectInListPropsType> = function (props: Project
 
     const classes = useStyles();
 
-    let currentTasks = props.tasksOfUser.filter(el => el.status !== 'ready').length ;
+    let currentTasks = props.tasksOfUser.filter(el => el.status !== 'ready').length;
 
     return (
         <Paper elevation={props.project.id === props.currentProjectId ? 10 : 2} className={classes.projects}
                onClick={() => props.setCurrentProjectId({currentProject: props.project.id})}>
-           {/* <Link to={'/boards'} className={classes.list}> // раскоментировав при нажатии будет сразу переходить на выбранный проект */}
-                <Box display={'flex'} alignItems="center" justifyContent="space-between">
-                    <Typography variant="h6" color={props.project.id === props.currentProjectId ? 'secondary' : 'primary'}>
-                        {props.project.name}
-                    </Typography>
-                    <Box>
+            {/* <Link to={'/boards'} className={classes.list}> // раскоментировав при нажатии будет сразу переходить на выбранный проект */}
+            <Box display={'flex'} alignItems="center" justifyContent="space-between">
+                <Typography variant="h6" color={props.project.id === props.currentProjectId ? 'secondary' : 'primary'}>
+                    {props.project.name}
+                </Typography>
+                <Box>
                     <Badge color="primary" badgeContent={currentTasks} showZero>
                         <Typography>Current tasks</Typography>
                     </Badge>
-                        <Divider className={classes.tasks}/>
+                    <Divider className={classes.tasks}/>
                     <Badge anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                           color="primary" badgeContent={props.userAccessibleTasks.length} className={classes.tasks} showZero>
+                           color="primary" badgeContent={props.userAccessibleTasks.length} className={classes.tasks}
+                           showZero>
                         <Typography>Available tasks</Typography>
                     </Badge>
-                    </Box>
                 </Box>
+            </Box>
             {/*</Link>*/}
         </Paper>
     );

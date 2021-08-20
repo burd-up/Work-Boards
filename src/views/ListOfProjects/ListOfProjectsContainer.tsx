@@ -7,7 +7,7 @@ import {projectType, userType} from "../../types/types";
 import ListOfProjects from "./ListOfProjects";
 
 type MapDispatchPropsType = {
-    setCurrentProjectId: (payload: { currentProject: number}) => void
+    setCurrentProjectId: (payload: { currentProject: number | null}) => void
 }
 type MapStatePropsType = {
     currentUser: userType
