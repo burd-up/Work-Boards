@@ -25,12 +25,12 @@ const initialState: initialStateType = {
             main: '#f9a825',
         },
     }, {
-        name: 'indigo',
+        name: ' teal',
         primary: {
-            main: '#283593',
+            main: '#009688',
         },
         secondary: {
-            main: '#283593',
+            main: '#1de9b6',
         },
     }, {
         name: 'purple',
@@ -64,15 +64,15 @@ const initialState: initialStateType = {
         secondary: {
             main: '#2e7d32',
         },
-    },{
-            name: 'start',
-            primary: {
-                main: '#3F51B5',
-            },
-            secondary: {
-                main: '#2979ff',
-            },
-        }
+    }, {
+        name: 'start',
+        primary: {
+            main: '#3F51B5',
+        },
+        secondary: {
+            main: '#2979ff',
+        },
+    }
 
     ]
 }

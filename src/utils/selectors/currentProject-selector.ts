@@ -36,20 +36,14 @@ export function userAccessibleTasksSelector(projects: Array<projectType>, curren
         ?projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.tester === null && el.forReview === true )
         :[]
     return [...accessibleDeveloperTasks, ...accessibleTesterTasks]
-
-/*    if (currentUser.accessLevel === 1) {
-        return  projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.status === 'newTask')
-    } else if(currentUser.accessLevel === 2) {
-        return projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.tester === null && el.forReview === true )
-    } else if(currentUser.accessLevel === 3) {
-        return projects.filter(el => el.id === currentProject)[0].tasks.filter(el => el.status === 'newTask'
-            || (el.forReview && el.tester === null && el.developer?.id !== currentUser.id))
-    } else {
-        return []
-    }*/
 }
 
 export function currentProjectNameSelector(projects: Array<projectType>, currentProjectId: number| null) {
     const currentProjectName = currentProjectId? projects.filter(el => el.id === currentProjectId)[0].name: null
     return currentProjectName
+}
+
+export function usersForAddingToProjectSelector(project: projectType, users: Array<userType>) {
+    const usersForAdding = users.filter(el => !project.developersId.includes(el.id))
+    return usersForAdding
 }

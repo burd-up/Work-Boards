@@ -12,6 +12,9 @@ const ListOfProjects: React.FC<PropsListOfProjectsType> = function (props: Props
     const projects = props.projectsForUser.map(el => <ProjectInList currentProjectId={props.currentProjectId}
                                                                     project={el}
                                                                     currentUser={props.currentUser}
+                                                                    users={props.users}
+                                                                    addProjectInArrayOfUsers={props.addProjectInArrayOfUsers}
+                                                                    addNewUserToProject={props.addNewUserToProject}
                                                                     tasksOfUser={
                                                                         tasksInProjectForUserSelector([el], props.currentUser.id, el.id)}
                                                                     userAccessibleTasks={

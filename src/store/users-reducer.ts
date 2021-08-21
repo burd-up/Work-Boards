@@ -12,8 +12,8 @@ const initialState: initialStateType = {
         {id: 0, name: 'Roman', surname: 'Lukichev', position: 'frontend developer', accesses: [1], projects: [0,2,3]}, //accessLevel: 1 означает что есть доступ к разработке
         {id: 1, name: 'Anya', surname: 'Deryabina', position: 'tester', accesses: [2], projects: [0,2,3]}, //accessLevel: 2 означает что есть доступ к тестированию и проверке
         {id: 2, name: 'Andrey', surname: 'Lukichev', position: 'team leader', accesses: [1,2,3,4], projects: [0,3]}, //accessLevel: 3 означает что есть доступ к созданию задач
-        {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accesses: [1,2,3], projects: [1,2]},
-        {id: 4, name: 'John', surname: 'Constantin', position: 'frontend developer', accesses: [1], projects: [1]},
+        {id: 3, name: 'Alex', surname: 'Leenders', position: 'team leader', accesses: [1,2,3], projects: [1,2]},//accessLevel: 4 означает что есть доступ к созданию проектов и их редактированию
+        {id: 4, name: 'John', surname: 'Constantin', position: 'frontend developer', accesses: [1], projects: [1]},//accessLevel: 5 означает что есть доступ к созданию пользователей
         {id: 5, name: 'Frodo', surname: 'Baggins', position: 'tester', accesses: [2], projects: [1]},
         {id: 6, name: 'Saitama', surname: 'One-Punch Man', position: 'general director', accesses: [1,2,3,4,5], projects: [0,1,2,3]},
         {id: 7, name: 'check', surname: 'person', position: 'general director', accesses: [1,2,3,4,5], projects: []}

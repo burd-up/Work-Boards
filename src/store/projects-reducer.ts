@@ -186,12 +186,18 @@ export const projectSlice = createSlice({
                 tasks: []
             }
             state.projects.push(newProject)
+        },
+        addNewUserToProject: (state:initialStateType, action:{payload: {users: Array<userType>, projectId: number}}) =>
+        {
+            const newDevelopersId = action.payload.users.map(el => el.id);
+            const oldDevelopersId = state.projects.filter(el => el.id === action.payload.projectId)[0].developersId
+            state.projects.filter(el => el.id === action.payload.projectId)[0].developersId = [...oldDevelopersId, ...newDevelopersId]
         }
     },
 
 })
 
 export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage,
-    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject, addNewProject} = projectSlice.actions
+    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject, addNewProject, addNewUserToProject} = projectSlice.actions
 
 export default projectSlice.reducer

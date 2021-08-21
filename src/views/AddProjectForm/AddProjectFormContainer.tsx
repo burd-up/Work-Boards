@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addNewProject, setCurrentProjectId} from '../../store/projects-reducer';
+import {addNewProject, setCurrentProjectId, addNewUserToProject} from '../../store/projects-reducer';
 import {addProjectInArrayOfUsers} from '../../store/users-reducer';
 import {RootState} from "../../store/store";
 import {projectType, userType} from "../../types/types";
@@ -32,4 +32,4 @@ let mapStateToProps = (state: RootState) => {
 }
 
 export default connect<MapStateToProps, MapDispatchToProps, {}, RootState>(mapStateToProps,
-    {addNewProject, setCurrentProjectId, addProjectInArrayOfUsers})(AddProjectForm)
+    {addNewProject, setCurrentProjectId, addProjectInArrayOfUsers,})(AddProjectForm)
