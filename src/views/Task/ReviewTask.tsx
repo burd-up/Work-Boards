@@ -9,16 +9,19 @@ import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import {taskType, userType} from "../../types/types";
 import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
 import CommunicationWindow from "./AuxiliaryComponents/CommunicationWindow";
+import {Badge} from "@material-ui/core";
 
 type PropsType = {
     task: taskType
     currentUser: userType
-    approveTask: (payload: {taskId: number}) => void
+    approveTask: (payload: { taskId: number }) => void
     sendMessage: (payload: { taskId: number, message: string, author: userType }) => void
-    takeTaskForRevision: (payload: {taskId: number }) => void
+    takeTaskForRevision: (payload: { taskId: number }) => void
+    unreadMessagesLength: number
+    readAllMessageInTask: (payload: { taskId: number, userId: number }) => void
 }
 
-const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
+const ReviewTask: React.FC<PropsType> = function (props: PropsType) {
 
     const [isOpenMessages, setIsOpenMessages] = React.useState(false);
 
@@ -33,8 +36,13 @@ const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
                         props.currentUser.id === props.task.tester?.id ||
                         props.currentUser.id === props.task.creator?.id)
                     &&
-                    <Button onClick={() => setIsOpenMessages(true)}>
-                        {<MessageOutlinedIcon color={'primary'}/>}
+                    <Button onClick={() => {
+                        setIsOpenMessages(true)
+                        props.readAllMessageInTask({taskId: props.task.id, userId: props.currentUser.id})
+                    }}>
+                        <Badge badgeContent={props.unreadMessagesLength} color={"error"}>
+                            {<MessageOutlinedIcon color={'primary'}/>}
+                        </Badge>
                     </Button>
                     }
                     {/*кнопка отправки задачи на доработку*/}
@@ -48,9 +56,10 @@ const ReviewTask: React.FC<PropsType> = function (props:PropsType) {
                     && <Button color={'primary'}
                                onClick={() => props.approveTask({taskId: props.task.id})}
                                endIcon={<ThumbUpAltOutlinedIcon/>}
-                            size="medium">approve</Button>
+                               size="medium">approve</Button>
                     }
-                    <CommunicationWindow sendMessage={props.sendMessage} currentUser={props.currentUser} isOpenMessages={isOpenMessages}
+                    <CommunicationWindow sendMessage={props.sendMessage} currentUser={props.currentUser}
+                                         isOpenMessages={isOpenMessages}
                                          setIsOpenMessages={setIsOpenMessages}
                                          {...props.task}/>
                 </ButtonGroup>

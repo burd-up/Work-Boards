@@ -9,6 +9,7 @@ import CompletedTask from "../Task/CompletedTask";
 import Typography from "@material-ui/core/Typography";
 import {PropsWorkBoardType} from "./WorkBoardContainer";
 import {takeTaskForRevision} from "../../store/projects-reducer";
+import {unreadMessagesForTaskSelector} from "../../utils/selectors/currentProject-selector";
 
 const useStyles = makeStyles((theme) => ({
     workBoard: {
@@ -32,6 +33,8 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardT
         takeTaskForReview={props.takeTaskForReview}
         giveTaskForReview={props.giveTaskForReview}
         sendMessage={props.sendMessage}
+        unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+        readAllMessageInTask={props.readAllMessageInTask}
     />)
 
     const reviewTasks = props.reviewTasks.map(el => <ReviewTask
@@ -40,12 +43,16 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardT
         approveTask={props.approveTask}
         sendMessage={props.sendMessage}
         takeTaskForRevision={props.takeTaskForRevision}
+        unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+        readAllMessageInTask={props.readAllMessageInTask}
     />)
 
     const completedTasks = props.completedTasks.map(el => <CompletedTask
         task={el}
         currentUser={props.currentUser}
         sendMessage={props.sendMessage}
+        unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+        readAllMessageInTask={props.readAllMessageInTask}
     />)
 
     return (

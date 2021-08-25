@@ -3,6 +3,8 @@ import {PropsListOfTasksType} from "../ListOfTasksContainer";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import CompletedTask from "../../Task/CompletedTask";
+import {unreadMessagesForTaskSelector} from "../../../utils/selectors/currentProject-selector";
+import RunningTask from "../../Task/RunningTask";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -20,10 +22,13 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function (props: Available
     const classes = useStyles()
 
     const readyTasks = props.tasksOfUser.map(el => {
-            if(el.status === 'ready') {
-                return(
+            if (el.status === 'ready') {
+                return (
                     <Grid item xs={12} md={6}><CompletedTask task={el} currentUser={props.currentUser}
-                                                       sendMessage={props.sendMessage}/></Grid>)
+                                                             sendMessage={props.sendMessage}
+                                                             unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+                                                             readAllMessageInTask={props.readAllMessageInTask}
+                    /></Grid>)
             }
         }
     )

@@ -5,6 +5,7 @@ import ReviewTask from "../../Task/ReviewTask";
 import CurrentTask from "../../Task/CurrentTask";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
+import {unreadMessagesForTaskSelector} from "../../../utils/selectors/currentProject-selector";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -26,12 +27,17 @@ const AvailableTasks: React.FC<AvailableTasksPropsType> = function (props: Avail
                 return <Grid item xs={12} md={6}><RunningTask task={el} currentUser={props.currentUser}
                                                               takeTaskForReview={props.takeTaskForReview}
                                                               giveTaskForReview={props.giveTaskForReview}
-                                                              sendMessage={props.sendMessage}/></Grid>
+                                                              sendMessage={props.sendMessage}
+                                                              unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+                                                              readAllMessageInTask={props.readAllMessageInTask}
+                /></Grid>
             } else if (el.status === 'testing') {
                 return <Grid item xs={12} md={6}><ReviewTask task={el} currentUser={props.currentUser}
                                                              approveTask={props.approveTask}
                                                              sendMessage={props.sendMessage}
-                                                             takeTaskForRevision={props.takeTaskForRevision}/></Grid>
+                                                             takeTaskForRevision={props.takeTaskForRevision}
+                                                             unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
+                                                             readAllMessageInTask={props.readAllMessageInTask}/></Grid>
             } else if (el.status === 'newTask') {
                 return <Grid item xs={12} md={6}><CurrentTask task={el} currentUser={props.currentUser}
                                                               takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>

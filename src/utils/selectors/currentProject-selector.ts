@@ -47,3 +47,18 @@ export function usersForAddingToProjectSelector(project: projectType, users: Arr
     const usersForAdding = users.filter(el => !project.developersId.includes(el.id))
     return usersForAdding
 }
+
+export function unreadMessagesForProjectSelector(project: projectType, currentUserId: number) {
+    const unreadMessagesLength: Array<number> = []
+    project.tasks.forEach(el => {
+        el.communication.forEach(el => {
+            !el.whoRead.includes(currentUserId) && unreadMessagesLength.push(1) 
+        })
+    })
+    return unreadMessagesLength.length
+}
+
+export function unreadMessagesForTaskSelector(task: taskType, currentUserId: number) {
+    const unreadMessagesLength = task.communication.filter(el => !el.whoRead.includes(currentUserId)).length
+    return unreadMessagesLength
+}

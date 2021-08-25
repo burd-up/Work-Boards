@@ -192,12 +192,21 @@ export const projectSlice = createSlice({
             const newDevelopersId = action.payload.users.map(el => el.id);
             const oldDevelopersId = state.projects.filter(el => el.id === action.payload.projectId)[0].developersId
             state.projects.filter(el => el.id === action.payload.projectId)[0].developersId = [...oldDevelopersId, ...newDevelopersId]
+        },
+        readAllMessageInTask: (state:initialStateType, action:{payload: {userId: number, taskId: number}}) =>
+        {
+            let indexProject = state.projects.findIndex(el => el.id === state.currentProjectId);
+            let indexTask = state.projects[indexProject].tasks.findIndex(el => el.id === action.payload.taskId);
+            state.projects[indexProject].tasks[indexTask].communication.forEach(el => {
+                el.whoRead = el.whoRead.includes(action.payload.userId) ? el.whoRead : [...el.whoRead, action.payload.userId]
+            })
         }
     },
 
 })
 
 export const {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage,
-    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject, addNewProject, addNewUserToProject} = projectSlice.actions
+    takeTaskForRevision, setCurrentProjectId, addNewTaskToProject, addNewProject, addNewUserToProject,
+    readAllMessageInTask} = projectSlice.actions
 
 export default projectSlice.reducer

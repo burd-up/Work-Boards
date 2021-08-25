@@ -9,6 +9,7 @@ import {taskType, userType} from "../../types/types";
 import Button from "@material-ui/core/Button";
 import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
 import CommunicationWindow from "./AuxiliaryComponents/CommunicationWindow";
+import {Badge} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -20,9 +21,11 @@ type PropsType = {
     task: taskType
     currentUser: userType
     sendMessage: (payload: { taskId: number, message: string, author: userType }) => void
+    unreadMessagesLength: number
+    readAllMessageInTask: (payload: { taskId: number, userId: number }) => void
 }
 
-const CompletedTask: React.FC<PropsType> = function (props:PropsType) {
+const CompletedTask: React.FC<PropsType> = function (props: PropsType) {
     const classes = useStyles();
 
     const [isOpenMessages, setIsOpenMessages] = React.useState(false);
@@ -36,12 +39,18 @@ const CompletedTask: React.FC<PropsType> = function (props:PropsType) {
                     props.currentUser.id === props.task.tester?.id ||
                     props.currentUser.id === props.task.creator?.id)
                 &&
-                <Button onClick={() => setIsOpenMessages(true)}>
-                    {<MessageOutlinedIcon color={'primary'}/>}
-                </Button>
+                <Badge badgeContent={props.unreadMessagesLength} color={"error"}>
+                    <Button onClick={() => {
+                        setIsOpenMessages(true)
+                        props.readAllMessageInTask({taskId: props.task.id, userId: props.currentUser.id})
+                    }}>
+                        {<MessageOutlinedIcon color={'primary'}/>}
+                    </Button>
+                </Badge>
                 }
-                <CheckCircleOutlineOutlinedIcon fontSize={'large'} className={classes.icon} />
-                <CommunicationWindow sendMessage={props.sendMessage} currentUser={props.currentUser} isOpenMessages={isOpenMessages}
+                <CheckCircleOutlineOutlinedIcon fontSize={'large'} className={classes.icon}/>
+                <CommunicationWindow sendMessage={props.sendMessage} currentUser={props.currentUser}
+                                     isOpenMessages={isOpenMessages}
                                      setIsOpenMessages={setIsOpenMessages}
                                      {...props.task}/>
             </Box>

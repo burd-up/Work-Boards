@@ -7,7 +7,11 @@ import {Badge} from "@material-ui/core";
 import {Link,} from "react-router-dom";
 import {projectType, taskType, userType} from "../../types/types";
 import AddWorkers from "./ChangeProject/AddWorkers";
-import {usersForAddingToProjectSelector} from "../../utils/selectors/currentProject-selector";
+import {
+    unreadMessagesForProjectSelector,
+    unreadMessagesForTaskSelector,
+    usersForAddingToProjectSelector
+} from "../../utils/selectors/currentProject-selector";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 type ProjectInListPropsType = {
@@ -18,8 +22,8 @@ type ProjectInListPropsType = {
     tasksOfUser: Array<taskType>
     userAccessibleTasks: Array<taskType>
     users: Array<userType>
-    addNewUserToProject: (payload: {users: Array<userType>, projectId: number}) => void
-    addProjectInArrayOfUsers: (payload: {users: Array<number>, projectId: number}) => void
+    addNewUserToProject: (payload: { users: Array<userType>, projectId: number }) => void
+    addProjectInArrayOfUsers: (payload: { users: Array<number>, projectId: number }) => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -48,14 +52,19 @@ const ProjectInList: React.FC<ProjectInListPropsType> = function (props: Project
 
     const [isOpenMenuAddingWorkers, setIsOpenMenuAddingWorkers] = useState<boolean>(false)
 
+    const unreadMessagesForProject = unreadMessagesForProjectSelector( props.project, props.currentUser.id)
+
     return (
         <Paper elevation={props.project.id === props.currentProjectId ? 10 : 2} className={classes.projects}
                onClick={() => props.setCurrentProjectId({currentProject: props.project.id})}>
             <Box display={'flex'} alignItems="center" justifyContent="space-between">
                 <Typography variant="h6" color={props.project.id === props.currentProjectId ? 'secondary' : 'primary'}>
-                    {props.project.name}
+                    <Badge color="primary" badgeContent={unreadMessagesForProject}>
+                        {props.project.name}
+                    </Badge>
                     {props.currentUser.accesses.includes(4) &&
-                    <Button className={classes.button} onClick={() => setIsOpenMenuAddingWorkers(true)} color={'primary'}>
+                    <Button className={classes.button} onClick={() => setIsOpenMenuAddingWorkers(true)}
+                            color={'primary'}>
                         <GroupAddIcon/>
                     </Button>}
                 </Typography>
@@ -71,9 +80,12 @@ const ProjectInList: React.FC<ProjectInListPropsType> = function (props: Project
                     </Badge>
                 </Box>
             </Box>
-            <AddWorkers setIsOpenMenuAddingWorkers={setIsOpenMenuAddingWorkers} addProjectInArrayOfUsers={props.addProjectInArrayOfUsers}
-                        isOpenMenuAddingWorkers={isOpenMenuAddingWorkers} addNewUserToProject={props.addNewUserToProject}
-                        project={props.project} availableUsers={usersForAddingToProjectSelector(props.project, props.users)}/>
+            <AddWorkers setIsOpenMenuAddingWorkers={setIsOpenMenuAddingWorkers}
+                        addProjectInArrayOfUsers={props.addProjectInArrayOfUsers}
+                        isOpenMenuAddingWorkers={isOpenMenuAddingWorkers}
+                        addNewUserToProject={props.addNewUserToProject}
+                        project={props.project}
+                        availableUsers={usersForAddingToProjectSelector(props.project, props.users)}/>
         </Paper>
     );
 }

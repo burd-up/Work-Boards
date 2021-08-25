@@ -6,6 +6,7 @@ import {
     giveTaskForReview,
     sendMessage,
     setCurrentProjectId,
+    readAllMessageInTask,
     takeTaskForDevelopment,
     takeTaskForReview, takeTaskForRevision
 } from "../../store/projects-reducer";
@@ -20,6 +21,7 @@ type MapDispatchPropsType = {
     approveTask: (payload: {taskId: number}) => void
     sendMessage: (payload: {taskId: number, author: userType, message: string}) => void
     takeTaskForRevision: (payload: {taskId: number }) => void
+    readAllMessageInTask: (payload: {taskId: number, userId: number}) => void
 }
 type MapStatePropsType = {
     currentUser: userType
@@ -37,4 +39,5 @@ let mapStateToProps = (state:RootState): MapStatePropsType => {
 }
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState>
 export default connect<MapStatePropsType, MapDispatchPropsType, {}, RootState> (mapStateToProps,
-    {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, approveTask, sendMessage, takeTaskForRevision})(ListOfTasks)
+    {takeTaskForDevelopment, takeTaskForReview, giveTaskForReview, readAllMessageInTask,
+        approveTask, sendMessage, takeTaskForRevision})(ListOfTasks)

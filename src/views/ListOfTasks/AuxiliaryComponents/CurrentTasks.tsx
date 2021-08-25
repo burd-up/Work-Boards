@@ -4,6 +4,7 @@ import RunningTask from "../../Task/RunningTask";
 import CurrentTask from "../../Task/CurrentTask";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
+import {unreadMessagesForTaskSelector} from "../../../utils/selectors/currentProject-selector";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -30,6 +31,8 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function ({currentUser, ..
                                                        takeTaskForReview={props.takeTaskForReview}
                                                        giveTaskForReview={props.giveTaskForReview}
                                                        sendMessage={props.sendMessage}
+                                                       unreadMessagesLength={unreadMessagesForTaskSelector(el, currentUser.id)}
+                                                       readAllMessageInTask={props.readAllMessageInTask}
                 /></Grid>)
         } else if (currentUser.accesses.includes(1) && currentUser.accesses.includes(2) && el.status === 'newTask') {
             return (
@@ -48,6 +51,8 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function ({currentUser, ..
                                                        takeTaskForReview={props.takeTaskForReview}
                                                        giveTaskForReview={props.giveTaskForReview}
                                                        sendMessage={props.sendMessage}
+                                                       unreadMessagesLength={unreadMessagesForTaskSelector(el, currentUser.id)}
+                                                       readAllMessageInTask={props.readAllMessageInTask}
                 /></Grid>)
         }
 
