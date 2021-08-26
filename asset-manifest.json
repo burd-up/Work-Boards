@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/burd-up/Work-Boards/static/css/main.ce5dd391.chunk.css",
+    "main.js": "/burd-up/Work-Boards/static/js/main.f3cf25b3.chunk.js",
+    "main.js.map": "/burd-up/Work-Boards/static/js/main.f3cf25b3.chunk.js.map",
+    "runtime-main.js": "/burd-up/Work-Boards/static/js/runtime-main.b26f78cb.js",
+    "runtime-main.js.map": "/burd-up/Work-Boards/static/js/runtime-main.b26f78cb.js.map",
+    "static/js/2.cf921a4c.chunk.js": "/burd-up/Work-Boards/static/js/2.cf921a4c.chunk.js",
+    "static/js/2.cf921a4c.chunk.js.map": "/burd-up/Work-Boards/static/js/2.cf921a4c.chunk.js.map",
+    "static/js/3.bd4a0dd7.chunk.js": "/burd-up/Work-Boards/static/js/3.bd4a0dd7.chunk.js",
+    "static/js/3.bd4a0dd7.chunk.js.map": "/burd-up/Work-Boards/static/js/3.bd4a0dd7.chunk.js.map",
+    "index.html": "/burd-up/Work-Boards/index.html",
+    "static/css/main.ce5dd391.chunk.css.map": "/burd-up/Work-Boards/static/css/main.ce5dd391.chunk.css.map",
+    "static/js/2.cf921a4c.chunk.js.LICENSE.txt": "/burd-up/Work-Boards/static/js/2.cf921a4c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b26f78cb.js",
+    "static/js/2.cf921a4c.chunk.js",
+    "static/css/main.ce5dd391.chunk.css",
+    "static/js/main.f3cf25b3.chunk.js"
+  ]
+}
