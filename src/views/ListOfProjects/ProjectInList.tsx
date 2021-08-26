@@ -13,6 +13,7 @@ import {
     usersForAddingToProjectSelector
 } from "../../utils/selectors/currentProject-selector";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 type ProjectInListPropsType = {
     currentProjectId: number | null
@@ -52,16 +53,17 @@ const ProjectInList: React.FC<ProjectInListPropsType> = function (props: Project
 
     const [isOpenMenuAddingWorkers, setIsOpenMenuAddingWorkers] = useState<boolean>(false)
 
-    const unreadMessagesForProject = unreadMessagesForProjectSelector( props.project, props.currentUser.id)
+    const unreadMessagesForProject = unreadMessagesForProjectSelector(props.project, props.currentUser.id)
 
     return (
         <Paper elevation={props.project.id === props.currentProjectId ? 10 : 2} className={classes.projects}
                onClick={() => props.setCurrentProjectId({currentProject: props.project.id})}>
             <Box display={'flex'} alignItems="center" justifyContent="space-between">
                 <Typography variant="h6" color={props.project.id === props.currentProjectId ? 'secondary' : 'primary'}>
-                    <Badge color="primary" badgeContent={unreadMessagesForProject}>
                         {props.project.name}
-                    </Badge>
+                        {unreadMessagesForProject !== 0 && <Badge color="error" badgeContent={unreadMessagesForProject}>
+                            <MailOutlineIcon className={classes.button}/>
+                        </Badge> }
                     {props.currentUser.accesses.includes(4) &&
                     <Button className={classes.button} onClick={() => setIsOpenMenuAddingWorkers(true)}
                             color={'primary'}>

@@ -30,8 +30,8 @@ const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
     return (
         <Box width={'100%'}>
             <DrawerMenu currentProject={props.currentProject} accesses={props.currentUser.accesses}
-                        isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu}
-                        currentProjectId={props.currentProjectId}/>
+                        isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu} messagesForCurrentProject={props.messagesForCurrentProject}
+                        currentProjectId={props.currentProjectId} messagesForAllProjects={props.messagesForAllProjects}/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton}

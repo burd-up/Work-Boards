@@ -6,7 +6,10 @@ import {setCurrentColor,} from "../../store/settings-reducer";
 import Header from "./Header";
 import {RootState} from "../../store/store";
 import {colorsThemeType, projectType, userType} from "../../types/types";
-import {currentProjectSelector} from "../../utils/selectors/currentProject-selector";
+import {
+    currentProjectSelector,
+    unreadMessagesForAllProjectsSelector, unreadMessagesForProjectSelector
+} from "../../utils/selectors/currentProject-selector";
 
 type OwnProps = {
     setColor: (param: {palette: {primary: {main: string}, secondary: {main: string}
@@ -14,6 +17,8 @@ type OwnProps = {
 }
 
 type MapStateToProps = {
+    messagesForAllProjects: number
+    messagesForCurrentProject: number
     users: Array<userType>
     currentUser: userType
     currentProjectId: number | null
@@ -35,7 +40,10 @@ let mapStateToProps = (state: RootState) => {
         currentProjectId: state.projects.currentProjectId,
         colors: state.settings.colors,
         currentColor: state.settings.currentColor,
-        currentProject: currentProjectSelector(state.projects.projects, state.projects.currentProjectId)
+        currentProject: currentProjectSelector(state.projects.projects, state.projects.currentProjectId),
+        messagesForAllProjects: unreadMessagesForAllProjectsSelector(state.projects.projects, state.users.currentUser.id),
+        messagesForCurrentProject: unreadMessagesForProjectSelector(state.projects.projects.filter(el => el.id === state.projects.currentProjectId)[0],
+            state.users.currentUser.id)
     }
 }
 

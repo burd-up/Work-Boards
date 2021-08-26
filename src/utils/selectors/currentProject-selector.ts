@@ -48,17 +48,40 @@ export function usersForAddingToProjectSelector(project: projectType, users: Arr
     return usersForAdding
 }
 
-export function unreadMessagesForProjectSelector(project: projectType, currentUserId: number) {
+export function unreadMessagesForProjectSelector(project: projectType | { tasks: Array<taskType> }, currentUserId: number) {
     const unreadMessagesLength: Array<number> = []
     project.tasks.forEach(el => {
-        el.communication.forEach(el => {
+        (el.tester?.id === currentUserId || el.developer?.id === currentUserId || el.creator?.id === currentUserId)
+        && el.communication.forEach(el => {
             !el.whoRead.includes(currentUserId) && unreadMessagesLength.push(1) 
         })
     })
     return unreadMessagesLength.length
 }
 
+export function unreadMessagesForAllProjectsSelector(projects: Array<projectType>, currentUserId: number) {
+    const unreadMessagesLength: Array<number> = []
+    projects.forEach(project => {
+        project.developersId.includes(currentUserId) && project.tasks.forEach(el => {
+            (el.tester?.id === currentUserId || el.developer?.id === currentUserId || el.creator?.id === currentUserId)
+            && el.communication.forEach(el => {
+                !el.whoRead.includes(currentUserId) && unreadMessagesLength.push(1)
+            })
+        })
+    })
+
+    return unreadMessagesLength.length
+}
+
 export function unreadMessagesForTaskSelector(task: taskType, currentUserId: number) {
     const unreadMessagesLength = task.communication.filter(el => !el.whoRead.includes(currentUserId)).length
     return unreadMessagesLength
+}
+
+export function tasksCreatedByTheUserSelector(project: projectType, currentUserId: number) {
+    const createdTasks: Array<taskType> = []
+    project.tasks.forEach(el => {
+        (el.creator?.id === currentUserId) && createdTasks.push(el)
+        })
+    return createdTasks
 }
