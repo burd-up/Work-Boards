@@ -28,7 +28,7 @@ type AllInformationTaskPropsType = taskType & {
 const useStyles = makeStyles(theme => ({
     dialogContent: {
         overflow: "hidden",
-        overflowY: 'hidden',
+        overflowY: 'auto',
     },
     placeForMessages: {
         minHeight: 165,

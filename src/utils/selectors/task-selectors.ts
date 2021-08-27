@@ -1,4 +1,4 @@
-import {projectType, taskType} from "../../types/types";
+import {projectType} from "../../types/types";
 
 type statusType = 'newTask'|'development'|'testing'|'ready'
 

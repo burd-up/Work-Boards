@@ -1,16 +1,11 @@
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import {projectType, taskType, userType} from "../../../types/types";
-import SelectionOfMultipleUsers from "../../AddProjectForm/SelectionOfMultipleUsers";
+import {projectType, userType} from "../../../types/types";
 import SelectionOfAvailableUsers from "./SelectionOfAvailableUsers";
-import {usersForAddingToProjectSelector} from "../../../utils/selectors/currentProject-selector";
-import { Container } from "@material-ui/core";
 
 type AddWorkersPropsType = {
     setIsOpenMenuAddingWorkers: (arg: boolean) => void

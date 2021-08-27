@@ -1,18 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
-import {ProjectsForUserSelector,
-    tasksCreatedByTheUserSelector, tasksInProjectForUserSelector, userAccessibleTasksSelector} from "../../utils/selectors/currentProject-selector";
+import {tasksCreatedByTheUserSelector, tasksInProjectForUserSelector, userAccessibleTasksSelector} from "../../utils/selectors/currentProject-selector";
 import {
     approveTask,
     giveTaskForReview,
     sendMessage,
-    setCurrentProjectId,
     readAllMessageInTask,
     takeTaskForDevelopment,
     takeTaskForReview, takeTaskForRevision
 } from "../../store/projects-reducer";
 import {RootState} from "../../store/store";
-import {projectType, taskType, userType} from "../../types/types";
+import {taskType, userType} from "../../types/types";
 import ListOfTasks from "./ListOfTasks";
 
 type MapDispatchPropsType = {
@@ -37,8 +35,9 @@ let mapStateToProps = (state:RootState): MapStatePropsType => {
         currentUser: state.users.currentUser,
         tasksOfUser: tasksInProjectForUserSelector(state.projects.projects, state.users.currentUser.id, state.projects.currentProjectId),
         userAccessibleTasks: userAccessibleTasksSelector(state.projects.projects, state.users.currentUser, state.projects.currentProjectId),
-        tasksCreatedByTheUser: tasksCreatedByTheUserSelector(state.projects.projects.filter(el => el.id === state.projects.currentProjectId)[0],
-            state.users.currentUser.id)
+        tasksCreatedByTheUser: state.projects.projects.filter(el => el.id === state.projects.currentProjectId).length > 0
+            ? tasksCreatedByTheUserSelector(state.projects.projects.filter(el => el.id === state.projects.currentProjectId)[0],
+            state.users.currentUser.id): [],
     }
 }
 //<TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultState>

@@ -1,9 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {colorsThemeType, userType} from '../types/types'
+import {colorsThemeType} from '../types/types'
 
 type initialStateType = {
     currentColor: colorsThemeType
     colors: Array<colorsThemeType>
+    isOpenLeftMenu: boolean
 }
 
 const initialState: initialStateType = {
@@ -74,7 +75,8 @@ const initialState: initialStateType = {
         },
     }
 
-    ]
+    ],
+    isOpenLeftMenu: false,
 }
 
 export const userSlice = createSlice({
@@ -84,9 +86,12 @@ export const userSlice = createSlice({
         setCurrentColor: (state, action: { payload: { name: string } }) => {
             state.currentColor = state.colors.filter(el => el.name === action.payload.name)[0]
         },
+        setIsOpenLeftMenu: (state, action: { payload: { open: boolean } }) => {
+            state.isOpenLeftMenu = action.payload.open
+        },
     },
 })
 
-export const {setCurrentColor,} = userSlice.actions
+export const {setCurrentColor, setIsOpenLeftMenu} = userSlice.actions
 
 export default userSlice.reducer

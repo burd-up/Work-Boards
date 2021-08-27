@@ -26,7 +26,7 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function ({currentUser, ..
         // accesses см. users-reducer
         if (currentUser.accesses.includes(1) && currentUser.accesses.includes(2) && el.forReview) {
             return (
-                <Grid item xs={12} md={6}><RunningTask currentUser={currentUser}
+                <Grid key={el.id} item xs={12} md={6}><RunningTask currentUser={currentUser}
                                                        task={el}
                                                        takeTaskForReview={props.takeTaskForReview}
                                                        giveTaskForReview={props.giveTaskForReview}
@@ -36,17 +36,17 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function ({currentUser, ..
                 /></Grid>)
         } else if (currentUser.accesses.includes(1) && currentUser.accesses.includes(2) && el.status === 'newTask') {
             return (
-                <Grid item xs={12} md={6}><CurrentTask currentUser={currentUser}
+                <Grid key={el.id} item xs={12} md={6}><CurrentTask currentUser={currentUser}
                                                        task={el}
                                                        takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>)
         } else if (currentUser.accesses.includes(1)) {
             return (
-                <Grid item xs={12} md={6}><CurrentTask currentUser={currentUser}
+                <Grid key={el.id} item xs={12} md={6}><CurrentTask currentUser={currentUser}
                                                        task={el}
                                                        takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>)
         } else if (currentUser.accesses.includes(2)) {
             return (
-                <Grid item xs={12} md={6}><RunningTask currentUser={currentUser}
+                <Grid key={el.id} item xs={12} md={6}><RunningTask currentUser={currentUser}
                                                        task={el}
                                                        takeTaskForReview={props.takeTaskForReview}
                                                        giveTaskForReview={props.giveTaskForReview}
@@ -55,34 +55,6 @@ const ReadyTasks: React.FC<AvailableTasksPropsType> = function ({currentUser, ..
                                                        readAllMessageInTask={props.readAllMessageInTask}
                 /></Grid>)
         }
-
-            /*if (props.currentUser.accessLevel === 1) {
-                return (
-                    <Grid item xs={12} md={6}><CurrentTask currentUser={props.currentUser}
-                                                           task={el}
-                                                           takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>)
-            } else if (props.currentUser.accessLevel === 2) {
-                return (
-                    <Grid item xs={12} md={6}><RunningTask currentUser={props.currentUser}
-                                                           task={el}
-                                                           takeTaskForReview={props.takeTaskForReview}
-                                                           giveTaskForReview={props.giveTaskForReview}
-                                                           sendMessage={props.sendMessage}
-                    /></Grid>)
-            } else if (props.currentUser.accessLevel === 3 && el.forReview) {
-                return (
-                    <Grid item xs={12} md={6}><RunningTask currentUser={props.currentUser}
-                                                           task={el}
-                                                           takeTaskForReview={props.takeTaskForReview}
-                                                           giveTaskForReview={props.giveTaskForReview}
-                                                           sendMessage={props.sendMessage}
-                    /></Grid>)
-            } else if (props.currentUser.accessLevel === 3 && el.status === 'newTask') {
-                return (
-                    <Grid item xs={12} md={6}><CurrentTask currentUser={props.currentUser}
-                                                           task={el}
-                                                           takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>)
-            }*/
         }
     )
 

@@ -6,7 +6,6 @@ import {giveTaskForReview, takeTaskForDevelopment, takeTaskForReview, readAllMes
 import {selectTasksByStatus} from "../../utils/selectors/task-selectors";
 import {RootState} from "../../store/store";
 import {projectType, taskType, userType} from "../../types/types";
-import RunningTask from "../Task/RunningTask";
 
 
 type MapDispatchPropsType = {

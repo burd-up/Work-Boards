@@ -4,12 +4,10 @@ import {Button, Divider, Paper} from "@material-ui/core";
 import {Typography} from "@material-ui/core";
 import {Box} from "@material-ui/core";
 import {Badge} from "@material-ui/core";
-import {Link,} from "react-router-dom";
 import {projectType, taskType, userType} from "../../types/types";
 import AddWorkers from "./ChangeProject/AddWorkers";
 import {
     unreadMessagesForProjectSelector,
-    unreadMessagesForTaskSelector,
     usersForAddingToProjectSelector
 } from "../../utils/selectors/currentProject-selector";
 import GroupAddIcon from '@material-ui/icons/GroupAdd';

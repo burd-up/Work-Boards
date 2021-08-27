@@ -5,8 +5,8 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import indigo from "@material-ui/core/colors/indigo";
-import {HeaderPropsType} from "../HeaderContainer";
 import {userType} from "../../../types/types";
+import {Avatar} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     list: {
         maxHeight: 500,
         overflow: "auto",
+    },
+    avatar: {
+        color: theme.palette.primary.main,
+        backgroundColor: 'white',
+        marginRight: 5
     }
 }));
 
@@ -32,7 +37,7 @@ type UserSelectionMenuPropsType = {
 const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCurrentUser, setCurrentProjectId, currentUser, users, currentProjectId, ...props}:UserSelectionMenuPropsType) {
     const classes = useStyles();
 
-    const listOfUsers = users.map(el => <MenuItem className={currentUser.id === el.id? classes.menuItem : ''}
+    const listOfUsers = users.map(el => <MenuItem key={el.id} className={currentUser.id === el.id? classes.menuItem : ''}
                                                   onClick={() => {
                                                       setCurrentUser(el);
                                                       setCurrentProjectId(
@@ -56,7 +61,8 @@ const UserSelectionMenu: React.FC<UserSelectionMenuPropsType> = function ({setCu
 
     return (<div>
             <Button className={classes.button} onClick={handleClick} endIcon={<MoreVertIcon/>}>
-                {`${currentUser.name} ${currentUser.surname} (${currentUser.position})`}
+                <Avatar className={classes.avatar}>{`${currentUser.name.substr(0, 1)}${currentUser.surname.substr(0, 1)}`}</Avatar>
+                {`${currentUser.name}`}
             </Button>
             <Menu
                 anchorEl={anchorEl}

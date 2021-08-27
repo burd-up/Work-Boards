@@ -5,12 +5,10 @@ import Box from "@material-ui/core/Box";
 import TaskContent from "./AuxiliaryComponents/TaskContent";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {taskType, userType} from "../../types/types";
-import {Badge, createStyles, IconButton, LinearProgress} from "@material-ui/core";
+import {Badge, createStyles, LinearProgress} from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import CommunicationWindow from "./AuxiliaryComponents/CommunicationWindow";
-import CardContent from "@material-ui/core/CardContent";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 const useStyles = makeStyles(() =>
     createStyles({

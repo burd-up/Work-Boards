@@ -1,11 +1,11 @@
 import React from "react";
-import {Avatar, Chip, Container, Paper, Typography} from '@material-ui/core';
+import {Avatar, Chip, Paper, Typography} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import {userType} from "../../../types/types";
 import ListOfUsers from "../../AddProjectForm/ListOfUsers/ListOfUsers";
 import Button from "@material-ui/core/Button";
-import { Box } from "@material-ui/core";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +45,7 @@ const SelectionOfAvailableUsers: React.FC<selectionOfMultipleUsersPropsType>
 
     return (
         <Grid container spacing={1} direction={'row'} alignItems={"flex-start"}>
-            <Grid item xs={9}>
+            <Grid item sm={9} xs={12}>
                 <Paper className={classes.paper}>
                     {selectedUsers.length === 0 ? <Typography variant={'subtitle1'}
                                                               color={'textSecondary'}
@@ -57,7 +57,7 @@ const SelectionOfAvailableUsers: React.FC<selectionOfMultipleUsersPropsType>
                     }
                 </Paper>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item sm={3} xs={12}>
                 <ListOfUsers users={availableUsers}
                              setSelectedUsers={setSelectedUsers}
                              selectedUsers={selectedUsers}/>

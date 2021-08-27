@@ -2,15 +2,12 @@ import React, {useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {useForm} from "react-hook-form";
-import {FilledInput, Input, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 import {AddAccessesFormType} from "./AddUserFormContainer";
 import {makeStyles} from "@material-ui/core/styles";
 import {Redirect} from "react-router-dom";
-import {userType} from "../../types/types";
 import ChoiceOfAccessLevels from "./ChoiceOfAccessLevels";
 
 const useStyles = makeStyles((theme) => ({

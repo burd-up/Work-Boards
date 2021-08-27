@@ -9,7 +9,7 @@ import {
 
 const ListOfProjects: React.FC<PropsListOfProjectsType> = function (props: PropsListOfProjectsType) {
 
-    const projects = props.projectsForUser.map(el => <ProjectInList currentProjectId={props.currentProjectId}
+    const projects = props.projectsForUser.map(el => <ProjectInList currentProjectId={props.currentProjectId} key={el.id}
                                                                     project={el}
                                                                     currentUser={props.currentUser}
                                                                     users={props.users}

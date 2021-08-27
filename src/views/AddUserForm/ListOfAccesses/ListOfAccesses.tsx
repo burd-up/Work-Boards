@@ -1,12 +1,9 @@
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {makeStyles} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
-import indigo from "@material-ui/core/colors/indigo";
-import {userType} from "../../../types/types";
-import {Avatar, Box, Checkbox, Chip, Container, Grid, Paper} from "@material-ui/core";
+import {Checkbox} from "@material-ui/core";
 import {rowAccessLevels} from "../../../utils/selectors/rowAccessLevels";
 
 type ListOfAccessesPropsType = {

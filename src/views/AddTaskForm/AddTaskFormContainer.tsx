@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {addNewTaskToProject} from '../../store/projects-reducer';
 import {RootState} from "../../store/store";
-import {taskType, userType} from "../../types/types";
+import {userType} from "../../types/types";
 import AddTaskForm from "./AddTaskForm";
 import {currentProjectNameSelector} from "../../utils/selectors/currentProject-selector";
 

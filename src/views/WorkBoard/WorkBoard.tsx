@@ -8,7 +8,6 @@ import ReviewTask from "../Task/ReviewTask";
 import CompletedTask from "../Task/CompletedTask";
 import Typography from "@material-ui/core/Typography";
 import {PropsWorkBoardType} from "./WorkBoardContainer";
-import {takeTaskForRevision} from "../../store/projects-reducer";
 import {unreadMessagesForTaskSelector} from "../../utils/selectors/currentProject-selector";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,12 +21,14 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardT
     const classes = useStyles();
 
     const currentTasks = props.currentTasks.map(el => <CurrentTask
+        key={el.id}
         task={el}
         currentUser={props.currentUser}
         takeTaskForDevelopment={props.takeTaskForDevelopment}
     />)
 
     const runningTasks = props.runningTasks.map(el => <RunningTask
+        key={el.id}
         task={el}
         currentUser={props.currentUser}
         takeTaskForReview={props.takeTaskForReview}
@@ -38,6 +39,7 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardT
     />)
 
     const reviewTasks = props.reviewTasks.map(el => <ReviewTask
+        key={el.id}
         task={el}
         currentUser={props.currentUser}
         approveTask={props.approveTask}
@@ -48,6 +50,7 @@ const WorkBoard: React.FC<PropsWorkBoardType> = function (props: PropsWorkBoardT
     />)
 
     const completedTasks = props.completedTasks.map(el => <CompletedTask
+        key={el.id}
         task={el}
         currentUser={props.currentUser}
         sendMessage={props.sendMessage}

@@ -1,20 +1,10 @@
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import {taskType} from "../../../types/types";
-import {Accordion, AccordionDetails, Chip, List, ListItemText} from "@material-ui/core";
-import {ListItem} from "@material-ui/core";
-import {AccordionSummary} from "@material-ui/core";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import WorkersAccordion from "./Subcomponents/WorkersAccordion";
-import green from "@material-ui/core/colors/green";
-import Priority from "./Subcomponents/Priority";
 import DescriptionAccordion from "./Subcomponents/DescriptionAccordion";
 import TitleForDialog from "./Subcomponents/TitleForDialogOfTask";
 

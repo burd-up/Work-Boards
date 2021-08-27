@@ -7,7 +7,6 @@ import Priority from "./Subcomponents/Priority";
 import Description from "./Subcomponents/Description";
 import AllInformationOfTask from "./AllInformationTask";
 import {taskType} from "../../../types/types";
-import CommunicationWindow from "./CommunicationWindow";
 
 const TaskContent: React.FC<taskType> = function (props: taskType) {
 

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -21,7 +21,7 @@ import {Badge} from "@material-ui/core";
 type DrawerMenuPropsType = {
     accesses: Array<number>
     isOpenLeftMenu: boolean
-    setIsOpenLeftMenu: (arg: boolean) => void
+    setIsOpenLeftMenu: (payload: { open: boolean }) => void
     currentProject: projectType | null
     currentProjectId: number | null
     messagesForCurrentProject: number
@@ -78,7 +78,7 @@ function DrawerMenu(props: DrawerMenuPropsType) {
                 </Box>
                 <Box p={1} alignSelf={'center'} justifyContent="flex-end">
                     <IconButton edge="start"
-                                onClick={() => props.setIsOpenLeftMenu(false)}
+                                onClick={() => props.setIsOpenLeftMenu({open: false})}
                                 color="primary" aria-label="menu">
                         <ArrowBackIosIcon/>
                     </IconButton>

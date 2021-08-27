@@ -26,7 +26,7 @@ const SelectionOfMultipleUsers: React.FC<selectionOfMultipleUsersPropsType>
     const classes = useStyles();
 
     const selectedUsersView = selectedUsers.map(el =>
-        <Grid item>
+        <Grid item key={el.id}>
             <Chip
                 avatar={<Avatar>{el.name.split('')[0]}{el.surname.split('')[0]}</Avatar>}
                 label={`${el.name} ${el.surname} (${el.position})`}
@@ -37,7 +37,7 @@ const SelectionOfMultipleUsers: React.FC<selectionOfMultipleUsersPropsType>
 
     return (
         <Grid container spacing={1} direction={'row'} alignItems={"flex-start"}>
-            <Grid item xs={9} md={10}>
+            <Grid item xs={12} sm={9}>
                 <Paper className={classes.paper}>
                     {selectedUsers.length === 0 ? <Typography variant={'subtitle1'}
                                                               color={'textSecondary'}
@@ -48,7 +48,7 @@ const SelectionOfMultipleUsers: React.FC<selectionOfMultipleUsersPropsType>
                     }
                 </Paper>
             </Grid>
-            <Grid item xs={3} md={2}>
+            <Grid item xs={12} sm={3}>
                 <ListOfUsers users={props.users}
                              setSelectedUsers={setSelectedUsers}
                              selectedUsers={selectedUsers}/>

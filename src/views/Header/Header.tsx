@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -23,19 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 const Header: React.FC<HeaderPropsType> = function (props:HeaderPropsType) {
 
-    const [isOpenLeftMenu, setIsOpenLeftMenu] = useState(false);
-
     const classes = useStyles();
 
     return (
         <Box width={'100%'}>
             <DrawerMenu currentProject={props.currentProject} accesses={props.currentUser.accesses}
-                        isOpenLeftMenu={isOpenLeftMenu} setIsOpenLeftMenu={setIsOpenLeftMenu} messagesForCurrentProject={props.messagesForCurrentProject}
+                        isOpenLeftMenu={props.isOpenLeftMenu} setIsOpenLeftMenu={props.setIsOpenLeftMenu} messagesForCurrentProject={props.messagesForCurrentProject}
                         currentProjectId={props.currentProjectId} messagesForAllProjects={props.messagesForAllProjects}/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton}
-                                onClick={() => setIsOpenLeftMenu(true)}
+                                onClick={() => props.setIsOpenLeftMenu({open: true})}
                                 color="inherit" aria-label="menu" >
                         <MenuIcon/>
                     </IconButton>

@@ -2,7 +2,6 @@ import React from "react";
 import {Chip, Paper, Typography} from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
-import {AddAccessesFormType} from "./AddUserFormContainer";
 import {rowAccessLevels} from "../../utils/selectors/rowAccessLevels";
 import ListOfAccesses from "./ListOfAccesses/ListOfAccesses";
 
@@ -29,7 +28,7 @@ const ChoiceOfAccessLevels: React.FC<selectionAccessesPropsType>
     console.log( selectedAccesses)
 
     const selectedUsersView = rowAccessLevels(selectedAccesses).map(el =>
-        <Grid item >
+        <Grid item key={el.num}>
             <Chip
                 label={el.row}
                 color="primary"
@@ -39,7 +38,7 @@ const ChoiceOfAccessLevels: React.FC<selectionAccessesPropsType>
 
     return (
         <Grid container spacing={1} direction={'row'} alignItems={"flex-start"}>
-            <Grid item xs={9} md={10}>
+            <Grid item xs={12} sm={9}>
                 <Paper className={classes.paper}>
                     {selectedAccesses.length === 0 ? <Typography variant={'subtitle1'}
                                                               color={'textSecondary'}
@@ -50,7 +49,7 @@ const ChoiceOfAccessLevels: React.FC<selectionAccessesPropsType>
                     }
                 </Paper>
             </Grid>
-            <Grid item xs={3} md={2}>
+            <Grid item xs={12} sm={3}>
                 <ListOfAccesses
                              setSelectedAccesses={setSelectedAccesses}
                              selectedAccesses={selectedAccesses}/>

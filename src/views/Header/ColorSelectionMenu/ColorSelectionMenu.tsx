@@ -1,11 +1,8 @@
 import React, {useState} from "react";
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {makeStyles} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
-import indigo from "@material-ui/core/colors/indigo";
-import {HeaderPropsType} from "../HeaderContainer";
 import {colorsThemeType} from "../../../types/types";
 import {Avatar, Box, Grid} from "@material-ui/core";
 import ColorLensOutlinedIcon from '@material-ui/icons/ColorLensOutlined';
@@ -44,9 +41,9 @@ const ColorSelectionMenu: React.FC<ColorSelectionMenuPropsType> = function (
 
     const classes = useStyles();
 
-    const listOfColor = colors.map(el => {
+    const listOfColor = colors.map((el,index) => {
         return (
-            <MenuItem onClick={() => {
+            <MenuItem key={index} onClick={() => {
                 setCurrentColor({name: el.name});
                 setColor({
                     palette: {

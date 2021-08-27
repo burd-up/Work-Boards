@@ -1,12 +1,10 @@
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {makeStyles} from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
-import indigo from "@material-ui/core/colors/indigo";
 import {userType} from "../../../types/types";
-import {Avatar, Box, Checkbox, Chip, Container, Grid, Paper} from "@material-ui/core";
+import {Box, Checkbox, Typography} from "@material-ui/core";
 
 type ListOfUsersPropsType = {
     users: Array<userType>
@@ -16,7 +14,8 @@ type ListOfUsersPropsType = {
 
 const ListOfUsers: React.FC<ListOfUsersPropsType> = function (props: ListOfUsersPropsType) {
 
-    const listOfUsers = props.users.map(el =>
+    const listOfUsers = props.users.length > 0 ?
+        props.users.map(el =>
         <MenuItem
             onClick={() => {
                 props.selectedUsers.includes(el) ? props.setSelectedUsers([...props.selectedUsers.filter(user => el.id !== user.id)])
@@ -28,6 +27,7 @@ const ListOfUsers: React.FC<ListOfUsersPropsType> = function (props: ListOfUsers
             />
             {`${el.name} ${el.surname} (${el.position})`}
         </MenuItem>)
+        : <Box margin={1}><Typography>all users are<br/> already involved in this project</Typography></Box>
 
     const [anchorEl, setAnchorEl] = useState(null);
 

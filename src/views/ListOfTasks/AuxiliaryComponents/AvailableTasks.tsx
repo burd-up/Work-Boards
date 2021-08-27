@@ -24,7 +24,7 @@ const AvailableTasks: React.FC<AvailableTasksPropsType> = function (props: Avail
 
     const tasks = props.tasksOfUser.map(el => {
             if (el.status === 'development') {
-                return <Grid item xs={12} md={6}><RunningTask task={el} currentUser={props.currentUser}
+                return <Grid key={el.id} item xs={12} md={6}><RunningTask task={el} currentUser={props.currentUser}
                                                               takeTaskForReview={props.takeTaskForReview}
                                                               giveTaskForReview={props.giveTaskForReview}
                                                               sendMessage={props.sendMessage}
@@ -32,14 +32,14 @@ const AvailableTasks: React.FC<AvailableTasksPropsType> = function (props: Avail
                                                               readAllMessageInTask={props.readAllMessageInTask}
                 /></Grid>
             } else if (el.status === 'testing') {
-                return <Grid item xs={12} md={6}><ReviewTask task={el} currentUser={props.currentUser}
+                return <Grid key={el.id} item xs={12} md={6}><ReviewTask task={el} currentUser={props.currentUser}
                                                              approveTask={props.approveTask}
                                                              sendMessage={props.sendMessage}
                                                              takeTaskForRevision={props.takeTaskForRevision}
                                                              unreadMessagesLength={unreadMessagesForTaskSelector(el, props.currentUser.id)}
                                                              readAllMessageInTask={props.readAllMessageInTask}/></Grid>
             } else if (el.status === 'newTask') {
-                return <Grid item xs={12} md={6}><CurrentTask task={el} currentUser={props.currentUser}
+                return <Grid key={el.id} item xs={12} md={6}><CurrentTask task={el} currentUser={props.currentUser}
                                                               takeTaskForDevelopment={props.takeTaskForDevelopment}/></Grid>
             } else {
                 return null

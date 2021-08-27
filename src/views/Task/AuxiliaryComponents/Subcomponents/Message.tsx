@@ -1,12 +1,13 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import {createStyles, Paper} from "@material-ui/core";
+import {createStyles,} from "@material-ui/core";
 import {messageType} from "../../../../types/types";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(() =>
     createStyles({
         message: {
+            wordBreak: "break-word",
             maxWidth: '20vw',
             minWidth: 250
         },

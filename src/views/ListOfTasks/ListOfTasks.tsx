@@ -1,20 +1,17 @@
 import React from "react";
-import {AppBar, Badge, Container, Paper, Tab, Tabs, Typography} from "@material-ui/core";
+import {AppBar, Badge, Container, Tab, Tabs, Typography} from "@material-ui/core";
 import {PropsListOfTasksType} from "./ListOfTasksContainer";
 import {makeStyles} from "@material-ui/core/styles";
 import AvailableTasks from "./AuxiliaryComponents/AvailableTasks";
 import SwipeableViews from 'react-swipeable-views';
 import CurrentTasks from "./AuxiliaryComponents/CurrentTasks";
 import ReadyTasks from "./AuxiliaryComponents/ReadyTasks";
-import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import CreatedTasks from "./AuxiliaryComponents/CreatedTasks";
-import CustomTab from "./AuxiliaryComponents/CustomTab";
 import {unreadMessagesForProjectSelector} from "../../utils/selectors/currentProject-selector";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        margin: 10,
+        marginTop: 10,
     },
 }));
 
